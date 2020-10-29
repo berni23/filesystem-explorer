@@ -1,6 +1,17 @@
 /* show messages to the user*/
 var infoWindow = $(".info-window");
+var formUpload = $("#formUpload");
 
+formUpload.submit(function(){
+    e.preventDefault();
+    let data = new FormData(formUpload);
+
+    fetch('src/server/upload.php', {
+        method: 'POST',
+        body: data
+    })
+    .then(res => res.text()).then(res => console.log(res));
+})
 
 
 function makeFile(myPath) {
