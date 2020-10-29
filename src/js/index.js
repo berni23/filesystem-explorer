@@ -3,7 +3,6 @@ var infoWindow = $(".info-window");
 
 
 
-
 function makeFile(myPath) {
 
     var arrayPath = myPath.split('/');
