@@ -7,7 +7,7 @@ function makeFile(myPath) {
         path: myPath
     }
 
-    fetch('src/SERVER/files.php?makeFile', {
+    fetch('src/server/files.php?makeFile', {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
@@ -16,6 +16,3 @@ function makeFile(myPath) {
         })
         .then(res => res.text()).then(res => console.log(res));
 }
-
-
-makeFile('file.txt');
