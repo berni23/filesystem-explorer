@@ -25,7 +25,7 @@ function makeFile(myPath, type = 'file') {
  * @returns array with paths, unidimensional array
  */
 function getAllPaths() {
-    return fetch('src/server/files.php?getAllPaths').then(res => res.json())
+    return fetch('src/server/files.php?getAllPaths').then(res => res.text());
 }
 
 
