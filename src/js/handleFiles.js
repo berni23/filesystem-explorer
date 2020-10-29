@@ -22,12 +22,21 @@ function makeFile(myPath, type = 'file') {
 
 /**
  * @description gets all file paths recursively starting on root
- * @returns array with paths
+ * @returns array with paths, unidimensional array
  */
 function getAllPaths() {
-    fetch('src/server/files.php?getAllPaths').then(res => res.json()).then(function (res) {
-        console.log(res);
-    });
+    return fetch('src/server/files.php?getAllPaths').then(res => res.json())
+}
+
+
+/**
+ * @description gets all file paths recursively
+ * @returns  returns it as a multidimensional asociative array
+ */
+
+function getTreePaths(data) {
+    return fetch('src/server/files.php?getTreePath')
+        .then(res => res.text());
 }
 
 /**

@@ -4,20 +4,20 @@
 
 $(document).ready(function () {
 
-    var formUpload = $("#formUpload");
-
     var currentPath = "."; // current part starting from root
 
-    formUpload.submit(function (e) {
+    $("#formUpload").submit(function (e) {
         e.preventDefault();
 
         var data = new FormData();
         var files = document.getElementById('uploadFile').files;
-
         console.log(files)
         data.append('file', files[0]);
         console.log(data);
         uploadFile(data).then(res => console.log(res));
 
+
     })
+
+    getTreePaths().then(res => console.log(res));
 });

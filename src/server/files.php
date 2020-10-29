@@ -33,7 +33,7 @@ if (isset($_GET["makeFile"])) {
 if (isset($_GET["getAllPaths"])) {
 
 
-    // METHOD 1 recursive iteration
+    // METHOD 1  all paths
 
     $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(relPath()));
     $filtered = new RegexIterator($files, '/\./');
@@ -42,7 +42,6 @@ if (isset($_GET["getAllPaths"])) {
     foreach ($filtered as $file) {
 
         $path =  $file->getRealPath();
-
         $path2 = str_replace(absPath(), "", $path);
         array_push($arrayPaths, $path2);
     }
@@ -50,5 +49,26 @@ if (isset($_GET["getAllPaths"])) {
     echo  json_encode($arrayPaths);
 }
 
+
+
+if (isset($_GET["getTreePath"])) {
+
+
+    // METHOD 2 array tree path
+
+    $rec = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(relPath()), RecursiveIteratorIterator::CHILD_FIRST);
+    $r = array();
+    foreach ($rec as $splFileInfo) {
+        $path = $splFileInfo->isDir() ? array($splFileInfo->getFilename() => array())  : array($splFileInfo->getFilename());
+
+        for ($depth = $rec->getDepth() - 1; $depth >= 0; $depth--) {
+            $path = array($rec->getSubIterator($depth)->current()->getFilename() => $path);
+        }
+        $r = array_merge_recursive($r, $path);
+    }
+
+    print_r($r);
+    exit();
+}
 
 // METHOD 2 scandir
