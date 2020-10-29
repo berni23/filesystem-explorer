@@ -23,6 +23,4 @@ $(document).ready(function () {
 
 
     getAllPaths().then(res => console.log(res));
-
-    getTreePaths().then(res => console.log(res))
 });
