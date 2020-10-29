@@ -1,3 +1,8 @@
+/* show messages to the user*/
+var infoWindow = $(".info-window");
+
+
+
 function makeFile(myPath) {
 
     var arrayPath = myPath.split('/');
@@ -7,7 +12,7 @@ function makeFile(myPath) {
         path: myPath
     }
 
-    fetch('src/SERVER/files.php?makeFile', {
+    fetch('src/server/files.php?makeFile', {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
@@ -18,4 +23,35 @@ function makeFile(myPath) {
 }
 
 
-makeFile('file.txt');
+
+//getAllPaths();
+
+function getAllPaths() {
+
+    fetch('src/server/files.php?getAllPaths').then(res => res.json()).then(function (res) {
+
+        console.log(res);
+
+    });
+
+}
+
+// utils
+
+
+function message(msg, tag = false) {
+
+    if (tag) infoWindow.addClass(tag);
+
+    infoWindow.text(msg);
+    infoWindow.addClass("show-info");
+    infoWindow.removeClass("hidden");
+    setTimeout(function () {
+        infoWindow.removeClass("show-info");
+        setTimeout(() => {
+
+            infoWindow.addClass("hidden");
+            if (tag) infoWindow.removeClass(tag);
+        }, 1000);
+    }, 1500);
+}
