@@ -22,11 +22,11 @@
 
     <!-- scripts-->
 
-
     <script src="permissions/permission.js"></script>
-    <link rel="stylesheet" href="src/styles/styles.css" />
+    <script src="src/js/utils.js"></script>
 
-    <script defer src="src/js/index.js"></script>
+    <script src="src/js/handleFiles.js"></script>
+    <link rel="stylesheet" href="src/styles/styles.css" />
 
     <title>File explorer</title>
 </head>
@@ -50,8 +50,9 @@
         </div>
     </nav>
 
-    <form enctype="multipart/form-data" id="formUpload">
-        <input type="file" name="userfile" />
+    <form enctype="multipart/form-data" method="post" id="formUpload">
+        <input type="file" name="uploadFile" id="uploadFile" />
+        <input type="text" value="hi" name="hi" />
         <input type="submit" value="Upload" />
     </form>
 
@@ -68,5 +69,7 @@
         <section class="file-properties col"></section>
 
     </main> -->
+
+<script defer src="src/js/index.js"></script>
 
 </html>
