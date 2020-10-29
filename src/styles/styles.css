@@ -35,7 +35,67 @@
     z-index: 2 !important;
 }
 
+
+/***FOLDER STRUCTURE***/
+
+
+
+#hierarchy {
+    font-family: FontAwesome;
+    width: 300px;
+}
+
+.foldercontainer,
+.file,
+.noitems {
+    display: block;
+    padding: 5px 5px 5px 50px;
+}
+
+.folder {
+    color: red;
+}
+
+.file {
+    color: green;
+}
+
+.folder,
+.file {
+    cursor: pointer;
+}
+
+.noitems {
+    display: none;
+    pointer-events: none;
+}
+
+.folder:hover,
+.file:hover {
+    background: yellow;
+}
+
+.folder:before,
+.file:before {
+    padding-right: 10px;
+}
+
+
+
+
+
+/***UTILS**/
+
+
+
+.hidden {
+
+    display: hidden !important;
+}
+
+
 /* window for displaying messages*/
+
 .info-window {
     position: fixed;
     top: 30%;
@@ -61,11 +121,8 @@
 }
 
 
-.hidden {
 
-    display: hidden;
-}
-
+/* message tags*/
 
 .success {
 
