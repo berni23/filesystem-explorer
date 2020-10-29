@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+    <!-- libraries-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         crossorigin="anonymous">
-
-    <link rel="stylesheet" href="src/styles/styles.css" />
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
     </script>
@@ -19,21 +19,24 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
     </script>
-    <title>Document</title>
+
+    <!-- scripts-->
+
+    <link rel="stylesheet" href="src/styles/styles.css" />
+    <script defer src="src/js/index.js"></script>
+
+    <title>File explorer</title>
 </head>
 
 <body>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-
         <div class="options-wrapper d-flex">
-
-            <img class="logo" src="../../assets/logo.png">
-            <input id="search-files" class="search-files  w-50" type="text" placeholder="Search" aria-label="Search">
+            <img class="logo" src="assets/logo.png">
+            <input id="search-files" class="search-files form-control  w-50" type="text" placeholder="Search"
+                aria-label="Search">
         </div>
 
-
         <div class="options-wrapper d-flex">
-
             <button type="button" class="btn btn-primary h-25">Upload file</button>
             <button type="button" class="btn btn-primary h-25">file options</button>
             <button type="button" class="btn btn-primary h-25">folder options</button>
