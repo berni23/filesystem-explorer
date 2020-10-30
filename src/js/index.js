@@ -1,68 +1,33 @@
 /* show messages to the user*/
-var infoWindow = $(".info-window");
-var formUpload = $("#formUpload");
-
-formUpload.submit(function(){
-    e.preventDefault();
-    let data = new FormData(formUpload);
-
-    fetch('src/server/upload.php', {
-        method: 'POST',
-        body: data
-    })
-    .then(res => res.text()).then(res => console.log(res));
-})
 
 
-function makeFile(myPath) {
 
-    var arrayPath = myPath.split('/');
+$(document).ready(function () {
 
-    var data = {
-        filename: arrayPath[arrayPath.length - 1],
-        path: myPath
-    }
 
-    fetch('src/server/files.php?makeFile', {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json'
+    var currentPath = "."; // current part starting from root
+
+    $("#formUpload").submit(function (e) {
+        e.preventDefault();
+
+        var data = new FormData();
+
+        var files = document.getElementById('uploadFile').files;
+        data.append('file', files[0]);
+        console.log(data);
+        uploadFile(data).then(res => {
+
+                message(res[1], res[0]);
+                console.log(res);
+
             }
-        })
-        .then(res => res.text()).then(res => console.log(res));
-}
+
+        );
 
 
+    })
 
-//getAllPaths();
+    //getTreePaths().then(res => console.log(res));
 
-function getAllPaths() {
-
-    fetch('src/server/files.php?getAllPaths').then(res => res.json()).then(function (res) {
-
-        console.log(res);
-
-    });
-
-}
-
-// utils
-
-
-function message(msg, tag = false) {
-
-    if (tag) infoWindow.addClass(tag);
-
-    infoWindow.text(msg);
-    infoWindow.addClass("show-info");
-    infoWindow.removeClass("hidden");
-    setTimeout(function () {
-        infoWindow.removeClass("show-info");
-        setTimeout(() => {
-
-            infoWindow.addClass("hidden");
-            if (tag) infoWindow.removeClass(tag);
-        }, 1000);
-    }, 1500);
-}
+    getAllPaths().then(res => console.log(res));
+});

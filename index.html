@@ -20,15 +20,18 @@
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
     </script>
 
-<script>
-$(function () {
-    $('[data-toggle="popover"]').popover()
-})
-</script>
+    <!-- scripts-->
 
-    <!-- <script src="permissions/permission.js"></script> -->
+    <script>
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        })
+    </script>
 
-    <script defer src="src/js/index.js"></script>
+    <!--<script src="permissions/permission.js"></script>-->
+    <script src="src/js/utils.js"></script>
+
+    <script src="src/js/handleFiles.js"></script>
     <link rel="stylesheet" href="src/styles/styles.css" />
 
     <title>File explorer</title>
@@ -40,72 +43,67 @@ $(function () {
     </div>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <img class="logo" src="assets/logo.png">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-            <li class="nav-item d-flex align-content-center">
-                <button type="button" class="btn btn-sm btn-danger" data-placement="bottom" data-trigger="focus" data-toggle="popover" title="Upload file" data-content="And here's some amazing content. It's very engaging. Right?">Upload files</button>
-            </li>
-            <li class="nav-item dropdown d-flex align-content-center">
-                <button type="button" class="margin-l-5 btn btn-primary dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    File options
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Modify</a>
-                <a class="dropdown-item" href="#">Delete</a>
-                </div>
-            </li>
-            <li class="nav-item dropdown d-flex align-content-center">
-                <button type="button" class="margin-l-5 btn btn-secondary dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Directory options
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Modify</a>
-                <a class="dropdown-item" href="#">Delete</a>
-            </div>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+                <li class="nav-item d-flex align-content-center">
+                    <button type="button" class="btn btn-sm btn-danger" data-placement="bottom" data-trigger="focus"
+                        data-toggle="popover" title="Upload file"
+                        data-content="And here's some amazing content. It's very engaging. Right?">Upload files</button>
+                </li>
+                <li class="nav-item dropdown d-flex align-content-center">
+                    <button type="button" class="margin-l-5 btn btn-primary dropdown-toggle" href="#"
+                        id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        File options
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Modify</a>
+                            <a class="dropdown-item" href="#">Delete</a>
+                        </div>
+                </li>
+                <li class="nav-item dropdown d-flex align-content-center">
+                    <button type="button" class="margin-l-5 btn btn-secondary dropdown-toggle" href="#"
+                        id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        Directory options
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Modify</a>
+                            <a class="dropdown-item" href="#">Delete</a>
+                        </div>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
         </div>
     </nav>
 
     <div class="container-full-width">
         <div class="row no-gutters">
             <div class="col-2 d-flex flex-column justify-content-center">
-            <div class="container d-flex justify-content-between margin-t-20">
-                <button type="button" class="btn btn-news btn-primary btn-md btn-block prueba">New File</button>
-                <button type="button" class="btn btn-news btn-secondary btn-md btn-block prueba">New Folder</button>
+                <div class="container d-flex justify-content-between margin-t-20">
+                    <button type="button" class="btn btn-news btn-primary btn-md btn-block prueba">New File</button>
+                    <button type="button" class="btn btn-news btn-secondary btn-md btn-block prueba">New Folder</button>
+                </div>
+                <p>1 of 3fgs dfg sdf gs dfgs dgsd fgs dfg</p>
             </div>
-            <p>1 of 3fgs dfg sdf gs dfgs dgsd fgs dfg</p>
+            <div class="col-7 d-flex justify-content-center">
+                2 of 3 (wider) sdg sdfgs dfgsdf gsdf gsd gsdf
             </div>
-          <div class="col-7 d-flex justify-content-center">
-              2 of 3 (wider) sdg sdfgs dfgsdf gsdf gsd gsdf
-          </div>
-          <div class="col d-flex justify-content-center">
-            3 of 3gsdf gsd gsdf gsd fgsd gsd fgdsfg
-          </div>
+            <div class="col d-flex justify-content-center">
+                3 of 3gsdf gsd gsdf gsd fgsd gsd fgdsfg
+            </div>
         </div>
     </div>
-    <!-- <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-        <div class="options-wrapper d-flex">
-            <img class="logo" src="assets/logo.png">
-            <input id="search-files" class="search-files form-control  w-50" type="text" placeholder="Search"
-                aria-label="Search">
-        </div>
 
-        <div class="options-wrapper d-flex">
-            <button type="button" class="btn btn-primary h-25 prueba">Upload file</button>
-            <button type="button" class="btn btn-primary h-25">file options</button>
-            <button type="button" class="btn btn-primary h-25">folder options</button>
-        </div>
-    </nav> -->
 
-<!--
+    <!--
     <form enctype="multipart/form-data" id="formUpload">
         <input type="file" name="userfile" />
         <input type="submit" value="Upload" />
@@ -115,14 +113,6 @@ $(function () {
 </body>
 
 
-<!-- <main class="container">
-
-        <section class="file-explorer col-3"></section>
-
-        <section class="file-viewer col-8"></section>
-
-        <section class="file-properties col"></section>
-
-    </main> -->
+<script defer src="src/js/index.js"></script>
 
 </html>

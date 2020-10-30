@@ -20,7 +20,6 @@ if (isset($_GET["makeFile"])) {
 
         if (file_exists($path)) {
             echo  json_encode(array('status' => 400, 'message' => 'file exists'));
-            exit;
         } else {
             $myfile = fopen($path, "w");
             fclose($myfile);
@@ -30,25 +29,23 @@ if (isset($_GET["makeFile"])) {
         }
     }
 }
-if (isset($_GET["getAllPaths"])) {
 
 
-    // METHOD 1 recursive iteration
+if (isset($_GET["getAllPaths"]))  echo json_encode(getAllPaths());
 
-    $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(relPath()));
-    $filtered = new RegexIterator($files, '/\./');
-    $arrayPaths  = array();
 
-    foreach ($filtered as $file) {
+function getAllPaths()
+{
 
-        $path =  $file->getRealPath();
+    $rootContent = []; // empty object
+    $directory = new RecursiveDirectoryIterator(relPath(), RecursiveDirectoryIterator::SKIP_DOTS);
+    $iterator = new RecursiveIteratorIterator($directory, RecursiveIteratorIterator::SELF_FIRST);
 
-        $path2 = str_replace(absPath(), "", $path);
-        array_push($arrayPaths, $path2);
+    foreach ($iterator as $info) {
+        $fileObj = new File($info);
+
+        array_push($rootContent, $fileObj);
     }
 
-    echo  json_encode($arrayPaths);
+    return $rootContent;
 }
-
-
-// METHOD 2 scandir
