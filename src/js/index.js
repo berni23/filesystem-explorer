@@ -8,26 +8,34 @@ $(document).ready(function () {
     var currentPath = ""; // current part starting from root
     var pathLabel = $('.path-label');
 
+
+
+    initialize();
+
+
+    function initialize() {
+        getAllPaths().then(function (res) {
+            var folderStructure = JSON.parse(res);
+            folderStructure.forEach((file) => {
+                populateFile(file);
+
+            })
+
+        });
+
+    }
+
     $("#formUpload").submit(function (e) {
         e.preventDefault();
-
         var data = new FormData();
-
         var files = document.getElementById('uploadFile').files;
         data.append('file', files[0]);
-        console.log(data);
-        uploadFile(data).then(res => {
-
-            console.log(res);
+        uploadFile(data, currentPath).then(res => {
             res = JSON.parse(res);
-
-            console.log(res);
             message(res["message"], res["status"]);
-            console.log(res);
 
         });
     })
-
 
     /*** FOLDER TREE **/
 
@@ -35,20 +43,24 @@ $(document).ready(function () {
     var rootContainer = $("#rootFolder>.foldercontainer")
     rootFolder.click(function (event) {
         var elem = event.target;
+
+        if (elem.tagName.toLowerCase() == "img") elem = event.target.parentNode;
         if (elem.tagName.toLowerCase() == "span" && elem !== event.currentTarget) {
             var type = elem.classList.contains("folder") ? "folder" : "file";
             if (type == "file") {
-                if ($(elem).data('parentPath')) pathLabel.text('root/' + $(elem).data('parentPath'));
-                else pathLabel.text('root/');
-                currentPath = $(elem).data('parentPath');
 
-            }
-            if (type == "folder") {
+                var path = $(elem).data('parentpath');
+
+
+                if (path) pathLabel.text('root/' + path);
+                else pathLabel.text('root/');
+                currentPath = path;
+
+            } else if (type == "folder") {
 
                 if ($(elem).data('path')) pathLabel.text('root/' + $(elem).data('path'));
                 else pathLabel.text('root/');
                 currentPath = $(elem).data('path');
-
                 var isexpanded = elem.dataset.isexpanded == "true";
                 if (isexpanded) {
                     elem.classList.remove("fa-folder");
@@ -58,10 +70,8 @@ $(document).ready(function () {
                     elem.classList.add("fa-folder");
                 }
                 elem.dataset.isexpanded = !isexpanded;
-
                 var toggleelems = [].slice.call(elem.parentElement.children);
                 var classnames = "file,foldercontainer,noitems".split(",");
-
                 toggleelems.forEach(function (element) {
                     if (classnames.some(function (val) {
                             return element.classList.contains(val);
@@ -74,23 +84,7 @@ $(document).ready(function () {
 
     //getTreePaths().then(res => console.log(res));
 
-    getAllPaths().then(function (res) {
-
-        console.log(res);
-        var folderStructure = JSON.parse(res);
-        folderStructure.forEach((file) => {
-
-            populateFile(file);
-
-        })
-
-    });
-
-
-
     function populateFile(file) {
-
-        console.log(file);
         if (file.extension == 'folder') {
 
             var folder = $('<div class = "foldercontainer"></div>');
@@ -104,7 +98,6 @@ $(document).ready(function () {
 
             else {
 
-                console.log('folder');
                 var parent = $(`.folder[data-path="${file.parentPath}"]`);
                 parent.after(folder);
             }
@@ -119,9 +112,6 @@ $(document).ready(function () {
             if (file.path.split('/').length <= 1) rootContainer.append(newFile);
 
             else {
-
-
-                console.log('file');
                 var parent = $(`.folder[data-path="${file.parentPath}"]`);
                 parent.after(newFile);
             }

@@ -6,6 +6,7 @@ include 'utils.php';
 
 if (isset($_FILES['file'])) {
 
+
     $ext_error = false;
     $path_info = pathinfo($_FILES['file']['name']);
     $uploadErrors = uploadErors(); // list of possible errors when uploading a file

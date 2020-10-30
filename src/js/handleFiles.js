@@ -44,8 +44,8 @@ function getTreePaths(data) {
  * @returns  success if successfully uploaded, else error
  */
 
-function uploadFile(data) {
-    return fetch('src/server/upload.php', {
+function uploadFile(data, location) {
+    return fetch('src/server/upload.php?location' + location, {
             method: 'post',
             body: data
         })
