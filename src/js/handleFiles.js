@@ -45,7 +45,7 @@ function getTreePaths(data) {
  */
 
 function uploadFile(data, location) {
-    return fetch('src/server/upload.php?location' + location, {
+    return fetch('src/server/upload.php?location=' + location, {
             method: 'post',
             body: data
         })

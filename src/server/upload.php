@@ -7,6 +7,7 @@ include 'utils.php';
 if (isset($_FILES['file'])) {
 
 
+    $location_file = $_GET["location"];
     $ext_error = false;
     $path_info = pathinfo($_FILES['file']['name']);
     $uploadErrors = uploadErors(); // list of possible errors when uploading a file
@@ -29,11 +30,11 @@ if (isset($_FILES['file'])) {
         echo  json_encode(array("status" => 400, "message" => $uploaderrors[[$_FILES["file"]["error"]]]));
     } else {
 
-        $destination =  relPath() . basename($_FILES['file']['name']);
+        $destination =  relPath() . $location_file . '/' . basename($_FILES['file']['name']);
 
         move_uploaded_file(($_FILES['file']['tmp_name']), $destination);
 
-        chmod($destination, 0777);
+        // chmod($destination, 0777);
         echo  json_encode(array("status" => 200, "message" => "Success! The file has been uploaded"));
     }
 }

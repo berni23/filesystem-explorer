@@ -1,17 +1,12 @@
 /* show messages to the user*/
 
-;
 
 $(document).ready(function () {
-
 
     var currentPath = ""; // current part starting from root
     var pathLabel = $('.path-label');
 
-
-
     initialize();
-
 
     function initialize() {
         getAllPaths().then(function (res) {
@@ -20,9 +15,7 @@ $(document).ready(function () {
                 populateFile(file);
 
             })
-
         });
-
     }
 
     $("#formUpload").submit(function (e) {
@@ -31,6 +24,8 @@ $(document).ready(function () {
         var files = document.getElementById('uploadFile').files;
         data.append('file', files[0]);
         uploadFile(data, currentPath).then(res => {
+            console.log('path', currentPath);
+            console.log(res);
             res = JSON.parse(res);
             message(res["message"], res["status"]);
 
@@ -50,7 +45,6 @@ $(document).ready(function () {
             if (type == "file") {
 
                 var path = $(elem).data('parentpath');
-
 
                 if (path) pathLabel.text('root/' + path);
                 else pathLabel.text('root/');
