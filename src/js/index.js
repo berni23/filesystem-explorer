@@ -1,8 +1,9 @@
 /* show messages to the user*/
 
-
+;
 
 $(document).ready(function () {
+
 
 
     var currentPath = "."; // current part starting from root
@@ -36,11 +37,11 @@ $(document).ready(function () {
             if (type == "folder") {
                 var isexpanded = elem.dataset.isexpanded == "true";
                 if (isexpanded) {
-                    elem.classList.remove("fa-folder-o");
-                    elem.classList.add("fa-folder");
-                } else {
                     elem.classList.remove("fa-folder");
                     elem.classList.add("fa-folder-o");
+                } else {
+                    elem.classList.remove("fa-folder-o");
+                    elem.classList.add("fa-folder");
                 }
                 elem.dataset.isexpanded = !isexpanded;
 
@@ -79,7 +80,7 @@ $(document).ready(function () {
         if (file.extension == 'folder') {
 
             var folder = $('<div class = "foldercontainer"></div>');
-            var folderIcon = $(`<span class="folder fa-folder-o" data-isexpanded="true">${file.name}</span>`);
+            var folderIcon = $(`<span class="folder fa-folder" data-isexpanded="true">${file.name}</span>`);
 
             folderIcon.attr("data-path", file.path ? file.path : 'null');
             folderIcon.attr("data-ext", file.extension);
@@ -94,7 +95,10 @@ $(document).ready(function () {
 
         } else {
 
-            var newFile = $(`<span class = "file fa-file-excel-o">${file.name}</span>`);
+
+
+
+            var newFile = $(`<span class ="file" ><img class = "ext-icon" src ="assets/file_extensions/${file.extension?file.extension:'file'}.svg">${file.name}</span>`);
             newFile.attr("data-path", file.path);
             newFile.attr("data-ext", file.extension);
 
@@ -102,8 +106,7 @@ $(document).ready(function () {
 
             else {
 
-                parentPath = file.parentPath ? file.parentPath : 'false';
-                var parent = $(`.folder[data-path=${file.parentPath}]`);
+                parent = $(`.folder[data-path=${file.parentPath ? file.parentPath : 'null'}]`);
                 parent.after(newFile);
             }
         }

@@ -19,17 +19,19 @@
     </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+
     </script>
 
-    <!-- scripts-->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 
+    <!-- scripts-->
     <script>
         $(function () {
             $('[data-toggle="popover"]').popover()
         })
     </script>
 
-    <!--<script src="permissions/permission.js"></script>-->
+    <script src="permissions/permission.js"></script>
     <script src="src/js/utils.js"></script>
 
     <script src="src/js/handleFiles.js"></script>
@@ -53,13 +55,14 @@
                 <li class="nav-item d-flex align-content-center">
                     <button type="button" class="btn btn-sm btn-danger" data-placement="bottom" data-trigger="focus"
                         data-toggle="popover" title="Upload file"
-                        data-content="And here's some amazing content. It's very engaging. Right?">Upload files</button>
+                        data-content="And here's some amazing content. It's very engaging. Right?"> <i
+                            class="fa fa-upload"></i></button>
                 </li>
                 <li class="nav-item dropdown d-flex align-content-center">
                     <button type="button" class="margin-l-5 btn btn-primary dropdown-toggle" href="#"
                         id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
-                        File options
+                        <i class="fa fa-file"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">Modify</a>
@@ -70,96 +73,49 @@
                     <button type="button" class="margin-l-5 btn btn-secondary dropdown-toggle" href="#"
                         id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
-                        Directory options
+                        <i class="fa fa-folder"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">Modify</a>
                             <a class="dropdown-item" href="#">Delete</a>
                         </div>
                 </li>
+
+                <li class="nav-item dropdown d-flex align-content-center">
+                    <button type="button" class="margin-l-5 btn btn-success dropdown-toggle" href="#"
+                        id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        <i class="fa fa-plus"></i>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">new file</a>
+                            <a class="dropdown-item" href="#">new folder</a>
+                        </div>
+                </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
+            <div class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
+            </div>
         </div>
     </nav>
 
     <div class="container-full-width">
         <div class="row no-gutters">
-            <div class="col-2 d-flex flex-column justify-content-center">
-                <div class="container d-flex justify-content-between margin-t-20">
-                    <button type="button" class="btn btn-news btn-primary btn-md btn-block prueba">New File</button>
-                    <button type="button" class="btn btn-news btn-secondary btn-md btn-block prueba">New Folder</button>
-                </div>
-                <p>1 of 3fgs dfg sdf gs dfgs dgsd fgs dfg</p>
+            <div class="col-2 d-flex flex-column justify-content-center files-wrapper">
 
+                <div class="btn btn-primary label-root">My Files</div>
 
                 <div id="rootFolder">
                     <div class="foldercontainer">
-                        <span class="folder fa-folder-o" data-path="" data-ext="folder"
-                            data-isexpanded="true">ROOT</span>
+                        <span class="folder fa-folder" data-path="" data-ext="folder" data-isexpanded="true">ROOT</span>
                     </div>
-                    <!--                       
-                        <div class="foldercontainer">
-                            <span class="folder fa-folder-o" data-isexpanded="true">Folder 1-1</span>
-                            <span class="file fa-file-excel-o">File 1-11</span>
-                            <span class="file fa-file-code-o">File 1-12</span>
-                            <span class="file fa-file-pdf-o">File 1-13</span>
-                        </div>
-
-                        <div class="foldercontainer">
-                            <span class="folder fa-folder">Folder 1-2</span>
-                            <span class='noitems'>No Items</span>
-                        </div>
-
-                        <div class="foldercontainer">
-                            <span class="folder fa-folder">Folder 1-3</span>
-                            <span class='noitems'>No Items</span>
-                        </div>
-
-                        <div class="foldercontainer">
-                            <span class="folder fa-folder">Folder 1-4</span>
-                            <span class='noitems'>No Items</span>
-                        </div>
-                    </div>
-
-                    <div class="foldercontainer">
-                        <span class="folder fa-folder-o" data-isexpanded="true">Folder 2</span>
-                        <span class="file fa-file-excel-o">File 21</span>
-                        <span class="file fa-file-code-o">File 22</span>
-                        <span class="file fa-file-pdf-o">File 23</span>
-
-                        <div class="foldercontainer">
-                            <span class="folder fa-folder-o" data-isexpanded="true">Folder 2-1</span>
-                            <span class="file fa-file-excel-o">File 2-11</span>
-                            <span class="file fa-file-code-o">File 2-12</span>
-                            <span class="file fa-file-pdf-o">File 2-13</span>
-
-                            <div class="foldercontainer">
-                                <span class="folder fa-folder">Folder 2-1-1</span>
-                                <span class='noitems'>No Items</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="foldercontainer">
-                        <span class="folder fa-folder-o" data-isexpanded="true">Folder 3</span>
-                        <span class="file fa-file-excel-o">File 31</span>
-                        <span class="file fa-file-code-o">File 32</span>
-                        <span class="file fa-file-pdf-o">File 33</span>
-
-                        <div class="foldercontainer">
-                            <span class="folder fa-folder">Folder 3-1</span>
-                            <span class='noitems'>No Items</span>
-                        </div>
-                    </div> -->
                 </div>
 
 
             </div>
             <div class="col-7 d-flex justify-content-center">
-                2 of 3 (wider) sdg sdfgs dfgsdf gsdf gsd gsdf
+                <div class="d-inline-flex flex-wrap p-2 bg-primary path-label"> path: root/</div>
             </div>
             <div class="col d-flex justify-content-center">
                 3 of 3gsdf gsd gsdf gsd fgsd gsd fgdsfg
@@ -181,6 +137,6 @@
 </body>
 
 
-<script defer src="src/js/index.js"></script>
+<script defer type="module" src="src/js/index.js"></script>
 
 </html>

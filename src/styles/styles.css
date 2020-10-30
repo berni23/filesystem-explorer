@@ -1,4 +1,10 @@
-/*body {}*/
+body {
+
+    font-family: 'Montserrat',
+        sans-serif;
+
+}
+
 
 .row>div {
     border-right: 1px solid #ccc;
@@ -49,8 +55,6 @@
 .navbar {
     z-index: 2 !important;
 }
-
-
 
 
 
@@ -110,11 +114,19 @@
 /*** FOLDER STRUCTURE **/
 
 
+.ext-icon {
+
+
+    width: 25px;
+    height: 25px;
+}
 
 #rootFolder {
 
     margin: 0;
+    margin-top: 50px;
     font-family: FontAwesome;
+    padding-left: 30px;
     width: 300px;
 }
 
@@ -122,15 +134,15 @@
 .file,
 .noitems {
     display: block;
-    padding: 5px 5px 5px 50px;
+    padding: 5px 5px 5px 20px;
 }
 
 .folder {
-    color: red;
+    color: black;
 }
 
 .file {
-    color: green;
+    color: blue;
 }
 
 .folder,
@@ -145,10 +157,30 @@
 
 .folder:hover,
 .file:hover {
-    background: yellow;
+    background: rgb(220, 220, 220, 0.5);
 }
 
 .folder:before,
 .file:before {
-    padding-right: 10px;
+    padding-right: 5px;
+}
+
+
+
+.label-root {
+
+    margin: 10px;
+}
+
+/*** DISPLAY FOLDER CONTENT**/
+
+
+.path-label {
+
+    height: 10% !important;
+    color: white;
+    padding: 10px 0;
+    margin-top: 10px;
+    border-radius: 5px;
+    flex-wrap: wrap;
 }
