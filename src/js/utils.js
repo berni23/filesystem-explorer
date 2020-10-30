@@ -17,6 +17,10 @@ function getPrefixPath() {
 
 function message(msg, tag = false) {
 
+
+    if (tag == 200) tag = 'success';
+    else if (tag == 400) tag = 'error';
+
     var infoWindow = $(".info-window");
     if (tag) infoWindow.addClass(tag);
     infoWindow.text(msg);

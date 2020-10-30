@@ -1,6 +1,8 @@
 /*body {}*/
 
-
+.row>div {
+    border-right: 1px solid #ccc;
+}
 
 .btn {
     padding: .3rem .7rem;
@@ -12,6 +14,19 @@
 
 }
 
+.margin-t-20 {
+    margin-top: 20px;
+}
+
+.margin-l-5 {
+    margin-left: 5px;
+}
+
+.btn-news {
+    max-width: 140px;
+    height: 50px;
+    margin-top: 0px !important;
+}
 
 .options-wrapper * {
     margin: 0 auto;
@@ -33,51 +48,6 @@
 
 .navbar {
     z-index: 2 !important;
-}
-
-
-/***FOLDER STRUCTURE***/
-
-
-
-#hierarchy {
-    font-family: FontAwesome;
-    width: 300px;
-}
-
-.foldercontainer,
-.file,
-.noitems {
-    display: block;
-    padding: 5px 5px 5px 50px;
-}
-
-.folder {
-    color: red;
-}
-
-.file {
-    color: green;
-}
-
-.folder,
-.file {
-    cursor: pointer;
-}
-
-.noitems {
-    display: none;
-    pointer-events: none;
-}
-
-.folder:hover,
-.file:hover {
-    background: yellow;
-}
-
-.folder:before,
-.file:before {
-    padding-right: 10px;
 }
 
 
@@ -133,4 +103,52 @@
 .error {
 
     background-color: #ffcccb;
+}
+
+
+
+/*** FOLDER STRUCTURE **/
+
+
+
+#rootFolder {
+
+    margin: 0;
+    font-family: FontAwesome;
+    width: 300px;
+}
+
+.foldercontainer,
+.file,
+.noitems {
+    display: block;
+    padding: 5px 5px 5px 50px;
+}
+
+.folder {
+    color: red;
+}
+
+.file {
+    color: green;
+}
+
+.folder,
+.file {
+    cursor: pointer;
+}
+
+.noitems {
+    display: none;
+    pointer-events: none;
+}
+
+.folder:hover,
+.file:hover {
+    background: yellow;
+}
+
+.folder:before,
+.file:before {
+    padding-right: 10px;
 }

@@ -4,34 +4,28 @@
 
 $(document).ready(function () {
 
+
     var currentPath = "."; // current part starting from root
 
     $("#formUpload").submit(function (e) {
         e.preventDefault();
 
         var data = new FormData();
+
         var files = document.getElementById('uploadFile').files;
-        console.log(files)
         data.append('file', files[0]);
         console.log(data);
-        uploadFile(data).then(res => console.log(res));
+        uploadFile(data).then(res => {
 
+            message(res[1], res[0]);
+            console.log(res);
 
+        });
     })
 
-    //getTreePaths().then(res => console.log(res));
 
-
-    getAllPaths().then(res => console.log(res));
-
-
-
-    /***FOLDER HIERARCHY***/
-
-
-
-    var hierarchy = document.getElementById("hierarchy");
-    hierarchy.addEventListener("click", function (event) {
+    var rootFolder = $("#rootFolder");
+    rootFolder.click(function (event) {
         var elem = event.target;
         if (elem.tagName.toLowerCase() == "span" && elem !== event.currentTarget) {
             var type = elem.classList.contains("folder") ? "folder" : "file";
@@ -60,8 +54,38 @@ $(document).ready(function () {
                 });
             }
         }
-    })
+    });
+
+    //getTreePaths().then(res => console.log(res));
+
+    getAllPaths().then(res => console.log(res));
 
 
 
+    /***FOLDER HIERARCHY***/
+
+
+    function populateFolderStructure(file) {
+
+        if (file.extension == 'folder') {
+
+            var folder = $('<div class = "foldercontainer"></div>');
+            var folderIcon = $(` <span class="folder fa-folder-o" data-isexpanded="true">${file.name}</span>`);
+
+
+            folder.append(folderIcon);
+
+            folder.data("path", file.path);
+            // folder.data("ext", file.extension);
+
+            if (!file.parentPath) rootFolder.append(folder);
+
+            else {
+
+
+                var parent = $(`.folder[data-path=${ file.parentPath}]`);
+            }
+
+        }
+    }
 })
