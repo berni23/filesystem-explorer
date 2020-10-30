@@ -5,7 +5,6 @@ body {
 
 }
 
-
 .row>div {
     border-right: 1px solid #ccc;
 }
@@ -126,7 +125,7 @@ body {
     margin: 0;
     margin-top: 50px;
     font-family: FontAwesome;
-    padding-left: 30px;
+    padding-left: 10%;
     width: 300px;
 }
 
@@ -165,11 +164,15 @@ body {
     padding-right: 5px;
 }
 
-
-
-.label-root {
+.label-root,
+.label-fileInfo {
 
     margin: 10px;
+}
+
+.label-fileInfo {
+    margin: 10px !important;
+
 }
 
 /*** DISPLAY FOLDER CONTENT**/
@@ -177,10 +180,9 @@ body {
 
 .path-label {
 
-    height: 10% !important;
+
+    height: 40px !important;
     color: white;
-    padding: 10px 0;
     margin-top: 10px;
     border-radius: 5px;
-    flex-wrap: wrap;
 }

@@ -37,15 +37,18 @@ class File
     {
 
         $path =  str_replace("\\", '', substr($info->getPath(), strlen(relPath())));
-        $arrayPath =   explode("/", $path);
+        // $arrayPath =   explode("/", $path);
 
-        array_pop($arrayPath);
+        // array_pop($arrayPath);
         $name = $info->getBasename();
 
-        $this->name = $name;
-        $this->path = $path;
-        $this->parentPath =  implode("/", $arrayPath);
+        $this->name = trim($name);
+        if ((trim($path)))  $this->path = trim($path) . '/' . trim($name);
+        else $this->path = trim($name);
 
+        $this->parentPath = $path;
+
+        // implode("/", $arrayPath);
         if ($info->isDir()) $this->extension = 'folder';
         else $this->extension = $info->getExtension();
 
