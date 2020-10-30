@@ -1,6 +1,6 @@
 /*body {}*/
 
-.row > div {
+.row>div {
     border-right: 1px solid #ccc;
 }
 
@@ -13,17 +13,19 @@
 
 
 }
-.margin-t-20{
+
+.margin-t-20 {
     margin-top: 20px;
 }
-.margin-l-5{
+
+.margin-l-5 {
     margin-left: 5px;
 }
 
-.btn-news{
-    max-width:140px;
+.btn-news {
+    max-width: 140px;
     height: 50px;
-    margin-top: 0px!important;
+    margin-top: 0px !important;
 }
 
 .options-wrapper * {
@@ -89,4 +91,52 @@
 .error {
 
     background-color: #ffcccb;
+}
+
+
+
+/*** FOLDER HIERARCHY **/
+
+
+
+#hierarchy {
+
+    margin: 0;
+    font-family: FontAwesome;
+    width: 300px;
+}
+
+.foldercontainer,
+.file,
+.noitems {
+    display: block;
+    padding: 5px 5px 5px 50px;
+}
+
+.folder {
+    color: red;
+}
+
+.file {
+    color: green;
+}
+
+.folder,
+.file {
+    cursor: pointer;
+}
+
+.noitems {
+    display: none;
+    pointer-events: none;
+}
+
+.folder:hover,
+.file:hover {
+    background: yellow;
+}
+
+.folder:before,
+.file:before {
+    padding-right: 10px;
 }
