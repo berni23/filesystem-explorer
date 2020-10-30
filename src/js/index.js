@@ -25,6 +25,7 @@ $(document).ready(function () {
 
 
     var rootFolder = $("#rootFolder");
+    var rootContainer = $("#rootFolder>.foldercontainer")
     rootFolder.click(function (event) {
         var elem = event.target;
         if (elem.tagName.toLowerCase() == "span" && elem !== event.currentTarget) {
@@ -58,34 +59,54 @@ $(document).ready(function () {
 
     //getTreePaths().then(res => console.log(res));
 
-    getAllPaths().then(res => console.log(res));
+    getAllPaths().then(function (res) {
 
+        console.log(res);
+        var folderStructure = JSON.parse(res);
+        folderStructure.forEach((file) => {
+
+            populateFile(file);
+
+        })
+
+    });
 
 
     /***FOLDER HIERARCHY***/
 
-
-    function populateFolderStructure(file) {
+    function populateFile(file) {
 
         if (file.extension == 'folder') {
 
             var folder = $('<div class = "foldercontainer"></div>');
-            var folderIcon = $(` <span class="folder fa-folder-o" data-isexpanded="true">${file.name}</span>`);
+            var folderIcon = $(`<span class="folder fa-folder-o" data-isexpanded="true">${file.name}</span>`);
 
-
+            folderIcon.attr("data-path", file.path ? file.path : 'null');
+            folderIcon.attr("data-ext", file.extension);
             folder.append(folderIcon);
 
-            folder.data("path", file.path);
-            // folder.data("ext", file.extension);
+            if (!file.path.length) rootContainer.append(folder);
 
-            if (!file.parentPath) rootFolder.append(folder);
+            else {
+                var parent = $(`.folder[data-path=${file.parentPath ? file.parentPath : 'null'}]`);
+                parent.after(folder);
+            }
+
+        } else {
+
+            var newFile = $(`<span class = "file fa-file-excel-o">${file.name}</span>`);
+            newFile.attr("data-path", file.path);
+            newFile.attr("data-ext", file.extension);
+
+            if (!file.parentPath.length) rootContainer.append(newFile);
 
             else {
 
-
-                var parent = $(`.folder[data-path=${ file.parentPath}]`);
+                parentPath = file.parentPath ? file.parentPath : 'false';
+                var parent = $(`.folder[data-path=${file.parentPath}]`);
+                parent.after(newFile);
             }
-
         }
+
     }
 })
