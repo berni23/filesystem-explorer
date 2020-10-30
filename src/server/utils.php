@@ -32,33 +32,34 @@ function uploadErors()
 
 class File
 {
-    function __construct($info)
+    function __construct($info, bool $all = false)
     {
         $this->name = $info->getBasename();
         $this->path = substr($info->getPath(), strlen(relPath()) - 1);
         if ($info->isDir())  $this->extension = 'folder';
         else $this->extension = $info->getExtension();
+
+
+        // if all, populate the rest of the fields
     }
+
 
     // Properties
 
-    public $name;
-    public $path;
-    public $extension;
+    private $name;
+    private $path;
+    private $extension;
+
+
+    private $size;
 
     // Methods
-    public  function set_name($name)
-    {
-        $this->name = $name;
-    }
+
     public function get_name()
     {
         return $this->name;
     }
-    public function set_path($path)
-    {
-        $this->path = $path;
-    }
+
     public function get_path()
     {
         return  $this->path;

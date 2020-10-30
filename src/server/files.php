@@ -40,6 +40,7 @@ function getAllPaths()
     $rootContent = []; // empty object
     $directory = new RecursiveDirectoryIterator(relPath(), RecursiveDirectoryIterator::SKIP_DOTS);
     $iterator = new RecursiveIteratorIterator($directory, RecursiveIteratorIterator::SELF_FIRST);
+
     foreach ($iterator as $info) {
         $fileObj = new File($info);
 
