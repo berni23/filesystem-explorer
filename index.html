@@ -45,17 +45,10 @@
 
                 <li class="nav-item d-flex align-content-center">
                     <label class="btn btn-sm btn-danger" id="formUpload" type="submit">
-                        <input type="file" name="userfile" />
+                        <input type="file" name="userfile" id="uploadFile" />
                         <i class="fa fa-cloud-upload"></i>
                     </label>
-
                 </li>
-                <!-- <li class="nav-item d-flex align-content-center">
-                    <button type="button" class="btn btn-sm btn-danger" data-placement="bottom" data-trigger="focus"
-                        data-toggle="popover" title="Upload file"
-                        data-content="And here's some amazing content. It's very engaging. Right?"> <i
-                            class="fa fa-upload"></i></button>
-                </li> -->
                 <li class="nav-item dropdown d-flex align-content-center">
                     <button type="button" class="margin-l-5 btn btn-primary dropdown-toggle" href="#"
                         id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -98,25 +91,18 @@
         </div>
     </nav>
 
-    <div class="container-full-width">
-        <div class="row no-gutters">
-
-            <div class="col-3 d-flex flex-column justify-content-center files-wrapper">
-
+    <div class="container-full-width main">
+        <div class=" columns-wrapper row no-gutters">
+            <div class="col-3 d-flex flex-column files-wrapper">
                 <div class="btn btn-primary label-root">My Files</div>
-
                 <div id="rootFolder">
                     <div class="foldercontainer">
                         <span class="folder fa-folder" data-path="" data-ext="folder" data-isexpanded="true">ROOT</span>
                     </div>
                 </div>
             </div>
-
-            <div class="col-6 d-flex flex-column">
-
+            <div class="col-6 d-flex flex-column folder-content">
                 <p class="btn btn-primary path-label">path: root/</p></br>
-
-
                 <table class="table container">
                     <thead class="thead-light">
                         <tr class="d-flex container">
@@ -149,12 +135,18 @@
                 </table>
             </div>
 
-            <div class="col-3 d-flex flex-column">
+            <div class="col-3 d-flex flex-column fileInfo-wrapper">
                 <div class="btn btn-primary label-fileInfo">File info</div>
 
             </div>
 
         </div>
+    </div>
+
+    <footer class="footer page-footer font-small blue blabla2">
+        <div class="footer text-center py-3 bg-warning"> FileExplorer, © 2020 Copyright, All rights reserved
+        </div>
+    </footer>
 
 </body>
 

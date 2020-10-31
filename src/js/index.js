@@ -1,7 +1,3 @@
-/* show messages to the user*/
-
-;
-
 $(document).ready(function () {
 
 
@@ -10,11 +6,15 @@ $(document).ready(function () {
 
 
 
-    initialize();
+    var height = $('.blabla2').height();
+    console.log(height);
 
+    initialize();
 
     function initialize() {
         getAllPaths().then(function (res) {
+
+            console.log(res);
             var folderStructure = JSON.parse(res);
             folderStructure.forEach((file) => {
                 populateFile(file);
@@ -25,11 +25,16 @@ $(document).ready(function () {
 
     }
 
-    $("#formUpload").submit(function (e) {
+
+    $("#uploadFile").change(function (e) {
+
+        console.log('event triggered');
         e.preventDefault();
         var data = new FormData();
         var files = document.getElementById('uploadFile').files;
         data.append('file', files[0]);
+
+        console.log(currentPath);
         uploadFile(data, currentPath).then(res => {
             res = JSON.parse(res);
             message(res["message"], res["status"]);
@@ -51,13 +56,11 @@ $(document).ready(function () {
 
                 var path = $(elem).data('parentpath');
 
-
                 if (path) pathLabel.text('root/' + path);
                 else pathLabel.text('root/');
                 currentPath = path;
 
             } else if (type == "folder") {
-
                 if ($(elem).data('path')) pathLabel.text('root/' + $(elem).data('path'));
                 else pathLabel.text('root/');
                 currentPath = $(elem).data('path');
