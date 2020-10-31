@@ -1,6 +1,11 @@
-/*body {}*/
+body {
 
-.row > div {
+    font-family: 'Montserrat',
+        sans-serif;
+
+}
+
+.row>div {
     border-right: 1px solid #ccc;
 }
 
@@ -13,17 +18,19 @@
 
 
 }
-.margin-t-20{
+
+.margin-t-20 {
     margin-top: 20px;
 }
-.margin-l-5{
+
+.margin-l-5 {
     margin-left: 5px;
 }
 
-.btn-news{
-    max-width:140px;
+.btn-news {
+    max-width: 140px;
     height: 50px;
-    margin-top: 0px!important;
+    margin-top: 0px !important;
 }
 
 .options-wrapper * {
@@ -46,9 +53,25 @@
 
 .navbar {
     z-index: 2 !important;
+    margin-bottom: 20px;
+    box-shadow: 0 20px 20px -20px rgba(0, 0, 0, 1) !important;
+
 }
 
+
+
+/***UTILS**/
+
+
+
+.hidden {
+
+    display: hidden !important;
+}
+
+
 /* window for displaying messages*/
+
 .info-window {
     position: fixed;
     top: 30%;
@@ -74,11 +97,8 @@
 }
 
 
-.hidden {
 
-    display: hidden;
-}
-
+/* message tags*/
 
 .success {
 
@@ -97,11 +117,12 @@
     max-width: 310px;
     align-items: center;
 }*/
-.flex-column{
-display:flex;
-flex-direction: column;
+.flex-column {
+    display: flex;
+    flex-direction: column;
 }
-label > input[type="file"] {
+
+label>input[type="file"] {
     display: none;
 }
 
@@ -109,4 +130,81 @@ label > input[type="file"] {
     padding: 7px 12px;
     cursor: pointer;
     margin-bottom: 0;
+}
+
+/*** FOLDER STRUCTURE **/
+
+
+.ext-icon {
+    width: 25px;
+    height: 25px;
+}
+
+#rootFolder {
+
+    margin: 0;
+    margin-top: 50px;
+    font-family: FontAwesome;
+    padding-left: 10%;
+    width: 100%;
+    overflow: auto;
+}
+
+.foldercontainer,
+.file,
+.noitems {
+    display: block;
+    padding: 5px 5px 5px 20px;
+}
+
+.folder {
+    color: black;
+}
+
+.file {
+    color: blue;
+}
+
+.folder,
+.file {
+    cursor: pointer;
+}
+
+.noitems {
+    display: none;
+    pointer-events: none;
+}
+
+.folder:hover,
+.file:hover {
+    background: rgb(220, 220, 220, 0.5);
+}
+
+.folder:before,
+.file:before {
+    padding-right: 5px;
+}
+
+.label-root,
+.label-fileInfo {
+
+    margin: 10px;
+}
+
+.label-fileInfo {
+    margin: 10px !important;
+
+}
+
+/*** DISPLAY FOLDER CONTENT**/
+
+
+.path-label {
+
+
+    height: 40px !important;
+    color: white;
+    margin-top: 10px;
+    margin: 10px 20px 20px 20px;
+    border-radius: 5px;
 }
