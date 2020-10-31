@@ -84,7 +84,6 @@ body {
 }
 
 
-
 /***UTILS**/
 
 
@@ -166,7 +165,7 @@ label>input[type="file"] {
     margin: 0;
     margin-top: 50px;
     font-family: FontAwesome;
-    padding-left: 10%;
+    /* padding-left: 10%;*/
     width: 100% !important;
     overflow: auto;
 }
