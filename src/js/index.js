@@ -1,15 +1,15 @@
-/* show messages to the user*/
-
-
 $(document).ready(function () {
 
     var currentPath = ""; // current part starting from root
     var pathLabel = $('.path-label');
 
+
     initialize();
 
     function initialize() {
         getAllPaths().then(function (res) {
+
+            console.log(res);
             var folderStructure = JSON.parse(res);
             folderStructure.forEach((file) => {
                 populateFile(file);
@@ -18,13 +18,17 @@ $(document).ready(function () {
         });
     }
 
-    $("#formUpload").submit(function (e) {
+
+    $("#uploadFile").change(function (e) {
+
+        console.log('event triggered');
         e.preventDefault();
         var data = new FormData();
         var files = document.getElementById('uploadFile').files;
         data.append('file', files[0]);
+
+        console.log(currentPath);
         uploadFile(data, currentPath).then(res => {
-            console.log('path', currentPath);
             console.log(res);
             res = JSON.parse(res);
             message(res["message"], res["status"]);
@@ -51,7 +55,6 @@ $(document).ready(function () {
                 currentPath = path;
 
             } else if (type == "folder") {
-
                 if ($(elem).data('path')) pathLabel.text('root/' + $(elem).data('path'));
                 else pathLabel.text('root/');
                 currentPath = $(elem).data('path');

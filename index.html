@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- libraries-->
-
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -25,12 +24,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 
     <!-- scripts-->
-    <script>
-        $(function () {
-            $('[data-toggle="popover"]').popover()
-        })
-    </script>
-
     <script src="permissions/permission.js"></script>
     <script src="src/js/utils.js"></script>
 
@@ -45,18 +38,16 @@
     <div class="info-window hidden">
     </div>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <img class="logo" src="assets/logo.png">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <img class="logo" src="assets/logo.png">
+
             <ul class="navbar-nav mr-auto">
+
                 <li class="nav-item d-flex align-content-center">
-                    <button type="button" class="btn btn-sm btn-danger" data-placement="bottom" data-trigger="focus"
-                        data-toggle="popover" title="Upload file"
-                        data-content="And here's some amazing content. It's very engaging. Right?"> <i
-                            class="fa fa-upload"></i></button>
+                    <label class="btn btn-sm btn-danger" id="formUpload" type="submit">
+                        <input type="file" name="userfile" id="uploadFile" />
+                        <i class="fa fa-cloud-upload"></i>
+                    </label>
                 </li>
                 <li class="nav-item dropdown d-flex align-content-center">
                     <button type="button" class="margin-l-5 btn btn-primary dropdown-toggle" href="#"
@@ -100,40 +91,71 @@
         </div>
     </nav>
 
-    <div class="container-full-width">
-        <div class="row no-gutters">
-            <div class="col-2 d-flex flex-column justify-content-center files-wrapper">
-
+    <div class="container-full-width main">
+        <div class=" columns-wrapper row no-gutters">
+            <div class="col-3 d-flex flex-column files-wrapper">
                 <div class="btn btn-primary label-root">My Files</div>
-
                 <div id="rootFolder">
                     <div class="foldercontainer">
                         <span class="folder fa-folder" data-path="" data-ext="folder" data-isexpanded="true">ROOT</span>
                     </div>
                 </div>
             </div>
-            <div class="col-7 d-flex justify-content-center">
-                <p class="btn btn-primary path-label">path: root/</p>
+            <div class="col-6 d-flex flex-column folder-content">
+                <p class="btn btn-primary path-label">path: root/</p></br>
+                <table class="table container">
+                    <thead class="thead-light">
+                        <tr class="d-flex container">
+                            <th class="col-6">Name</th>
+                            <th class="col-3">Label</th>
+                            <th class="col-1">Size</th>
+                            <th class="col-2">Modified</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="d-flex container">
+                            <td class="col-6">Excel 2003</td>
+                            <td class="col-3">label</td>
+                            <td class="col-1">235 KB</td>
+                            <td class="col-2">23 Feb, 2016</td>
+                        </tr>
+                        <tr class="d-flex container">
+                            <td class="col-6">Excel 2003</td>
+                            <td class="col-3">label</td>
+                            <td class="col-1">235 KB</td>
+                            <td class="col-2">23 Feb, 2016</td>
+                        </tr>
+                        <tr class="d-flex container">
+                            <td class="col-6">Excel 2003</td>
+                            <td class="col-3">label</td>
+                            <td class="col-1">235 KB</td>
+                            <td class="col-2">23 Feb, 2016</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <div class="col-3 d-flex flex-column">
+
+            <div class="col-3 d-flex flex-column fileInfo-wrapper">
                 <div class="btn btn-primary label-fileInfo">File info</div>
 
             </div>
+
         </div>
     </div>
 
-
-    <form enctype="multipart/form-data" id="formUpload">
-        <input type="file" name="uploadFile" id="uploadFile" />
-        <input type="submit" value="Upload" />
-    </form>
-
-
-
-
+    <footer class="footer page-footer font-small blue blabla2">
+        <div class="footer text-center py-3 bg-warning"> FileExplorer, © 2020 Copyright, All rights reserved
+        </div>
+    </footer>
 
 </body>
 
+<!--
+            <form  enctype="multipart/form-data" id="formUpload">
+                <input type="file" name="userfile" />
+                <input type="submit" value="Upload" />
+            </form>
+-->
 
 <script defer type="module" src="src/js/index.js"></script>
 
