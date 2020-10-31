@@ -36,6 +36,8 @@ $(document).ready(function () {
 
         console.log(currentPath);
         uploadFile(data, currentPath).then(res => {
+
+            console.log(res);
             res = JSON.parse(res);
             message(res["message"], res["status"]);
 
