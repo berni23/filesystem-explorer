@@ -90,3 +90,23 @@
 
     background-color: #ffcccb;
 }
+
+/*#formUpload{
+    display:flex;
+    flex-direction: column;
+    max-width: 310px;
+    align-items: center;
+}*/
+.flex-column{
+display:flex;
+flex-direction: column;
+}
+label > input[type="file"] {
+    display: none;
+}
+
+#formUpload {
+    padding: 7px 12px;
+    cursor: pointer;
+    margin-bottom: 0;
+}

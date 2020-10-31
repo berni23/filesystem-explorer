@@ -29,5 +29,5 @@ $(document).ready(function () {
 
     //getTreePaths().then(res => console.log(res));
 
-    getAllPaths().then(res => console.log(res));
+    //getAllPaths().then(res => console.log(res));
 });

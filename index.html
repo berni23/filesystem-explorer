@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- libraries-->
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         crossorigin="anonymous">
@@ -18,14 +18,6 @@
     </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
-    </script>
-
-    <!-- scripts-->
-
-    <script>
-        $(function () {
-            $('[data-toggle="popover"]').popover()
-        })
     </script>
 
     <!--<script src="permissions/permission.js"></script>-->
@@ -42,18 +34,13 @@
     <div class="info-window hidden">
     </div>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <img class="logo" src="assets/logo.png">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <img class="logo" src="assets/logo.png">
+            <label class="btn btn-sm btn-danger" id="formUpload" type="submit">
+                <input type="file" name="userfile" />
+                <i class="fa fa-cloud-upload"></i> Upload files
+            </label>
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item d-flex align-content-center">
-                    <button type="button" class="btn btn-sm btn-danger" data-placement="bottom" data-trigger="focus"
-                        data-toggle="popover" title="Upload file"
-                        data-content="And here's some amazing content. It's very engaging. Right?">Upload files</button>
-                </li>
                 <li class="nav-item dropdown d-flex align-content-center">
                     <button type="button" class="margin-l-5 btn btn-primary dropdown-toggle" href="#"
                         id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -86,15 +73,48 @@
 
     <div class="container-full-width">
         <div class="row no-gutters">
-            <div class="col-2 d-flex flex-column justify-content-center">
+            <div class="col-2 d-flex flex-column align-items-center">
                 <div class="container d-flex justify-content-between margin-t-20">
                     <button type="button" class="btn btn-news btn-primary btn-md btn-block prueba">New File</button>
                     <button type="button" class="btn btn-news btn-secondary btn-md btn-block prueba">New Folder</button>
                 </div>
+
                 <p>1 of 3fgs dfg sdf gs dfgs dgsd fgs dfg</p>
             </div>
             <div class="col-7 d-flex justify-content-center">
-                2 of 3 (wider) sdg sdfgs dfgsdf gsdf gsd gsdf
+
+                <table class="table">
+                    <thead class="thead-light">
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Label</th>
+                        <th scope="col">Size</th>
+                        <th scope="col">Modified</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th>Excel 2003</th>
+                        <td>label</td>
+                        <td>235 KB</td>
+                        <td>23 Feb, 2016</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">3</th>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td>@twitter</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  
+
             </div>
             <div class="col d-flex justify-content-center">
                 3 of 3gsdf gsd gsdf gsd fgsd gsd fgdsfg
@@ -102,16 +122,14 @@
         </div>
     </div>
 
-
-    <!--
-    <form enctype="multipart/form-data" id="formUpload">
-        <input type="file" name="userfile" />
-        <input type="submit" value="Upload" />
-    </form>
--->
-
 </body>
 
+<!--
+            <form  enctype="multipart/form-data" id="formUpload">
+                <input type="file" name="userfile" />
+                <input type="submit" value="Upload" />
+            </form>
+-->
 
 <script defer src="src/js/index.js"></script>
 
