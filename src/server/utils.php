@@ -1,21 +1,28 @@
 
+
 <?php
+// relative path of the root folder
 
 function relPath()
 {
     return  '../../root/';
 }
 
+// absolute path of the root folder
 function absPath()
 {
     return  RealPath(relPath());
 }
+
+
+// array of valid extension
 
 function validExtensions()
 {
     return   array('doc', 'docx', 'csv', 'jpg', 'png', 'txt', 'ppt', 'odt', 'pdf', 'zip', 'rar', 'exe', 'svg', 'mp3', 'mp4');
 }
 
+// array of errors when uploading
 function uploadErors()
 {
     return array(
@@ -30,29 +37,64 @@ function uploadErors()
     );
 }
 
+
+// get all  sub paths recursively given a path
+
+function getAllPaths($path)
+{
+    $rootContent = [];
+    $directory = new RecursiveDirectoryIterator($path, RecursiveDirectoryIterator::SKIP_DOTS);
+    $iterator = new RecursiveIteratorIterator($directory, RecursiveIteratorIterator::SELF_FIRST);
+    foreach ($iterator as $info) {
+        $fileObj = new File($info);
+        array_push($rootContent, $fileObj);
+    }
+    return $rootContent;
+}
+
+
+
+
+function getFolderContent($path, $all = false)
+{
+    $contents = scandir($path);
+    $arrayFiles = [];
+
+    foreach ($contents as $filename) {
+        if ($filename[0] != '.') {
+            $file = new File(new SplFileInfo($path . $filename), $all);
+            array_push($arrayFiles, $file);
+        }
+    }
+    return $arrayFiles;
+}
+
+/*
+
+class file used to pass information of a file from php to javascript.
+The constructor expects a class of type SplFileInfo. as optional parameter, there is a boolean,
+the class retrieves all the information if it is true, else just a subset of it necessary for populating
+the initial fields.
+
+*/
 class File
 {
-    function __construct($info)
-
+    function __construct($info, bool $all = false)
     {
-
         $path =  str_replace("\\", '', substr($info->getPath(), strlen(relPath())));
-        // $arrayPath =   explode("/", $path);
-
-        // array_pop($arrayPath);
         $name = $info->getBasename();
-
         $this->name = trim($name);
         if ((trim($path)))  $this->path = trim($path) . '/' . trim($name);
         else $this->path = trim($name);
-
         $this->parentPath = $path;
-
-        // implode("/", $arrayPath);
         if ($info->isDir()) $this->extension = 'folder';
         else $this->extension = $info->getExtension();
 
-        // if all, populate the rest of the fields
+        if ($all) {
+            $this->size = $info->getSize();
+            $this->modified = $info->getMTime();
+            $this->creationDate = $info->getCTime();
+        };
     }
 
     // Properties
@@ -61,22 +103,4 @@ class File
     public $path;
     public $parentPath;
     public $extension;
-
-
-    // Methods
-
-    public function get_name()
-    {
-        return $this->name;
-    }
-
-    public function get_path()
-    {
-        return  $this->path;
-    }
-
-    public function get_extension()
-    {
-        return $this->extension;
-    }
 }

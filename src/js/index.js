@@ -6,6 +6,8 @@ $(document).ready(function () {
 
     initialize();
 
+    getFolderContent(currentPath).then(res => console.log(res));
+
     function initialize() {
         getAllPaths().then(function (res) {
 

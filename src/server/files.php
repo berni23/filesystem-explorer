@@ -2,10 +2,11 @@
 
 
 include "utils.php";
-// create file
-
 
 session_start();
+
+
+$root = relPath();
 
 
 // check if file exists
@@ -16,7 +17,7 @@ if (isset($_GET["makeFile"])) {
 
     $data = json_decode(file_get_contents('php://input'), true);
     if (isset($data['path']) && isset($data['filename'])) {
-        $path =  relPath() . $data['path'];
+        $path =  $root . $data['path'];
 
         if (file_exists($path)) {
             echo  json_encode(array('status' => 400, 'message' => 'file exists'));
@@ -31,21 +32,10 @@ if (isset($_GET["makeFile"])) {
 }
 
 
-if (isset($_GET["getAllPaths"]))  echo json_encode(getAllPaths());
+if (isset($_GET["getAllPaths"]))  echo json_encode(getAllPaths($root));
 
+if (isset($_GET["folderContent"])) {
 
-function getAllPaths()
-{
-
-    $rootContent = []; // empty object
-    $directory = new RecursiveDirectoryIterator(relPath(), RecursiveDirectoryIterator::SKIP_DOTS);
-    $iterator = new RecursiveIteratorIterator($directory, RecursiveIteratorIterator::SELF_FIRST);
-
-    foreach ($iterator as $info) {
-        $fileObj = new File($info);
-
-        array_push($rootContent, $fileObj);
-    }
-
-    return $rootContent;
+    $path = $root . $_GET["folderContent"];
+    echo json_encode(getFolderContent($path, true));
 }

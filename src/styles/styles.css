@@ -365,6 +365,21 @@ table.col-1 {
 
 }
 
+
+@media (max-height:620px) {
+
+    footer {
+
+        display: none;
+    }
+
+    .main {
+
+        height: calc(100% - 60px) !important;
+    }
+
+}
+
 /* customized scrollbar*/
 
 ::-webkit-scrollbar {
