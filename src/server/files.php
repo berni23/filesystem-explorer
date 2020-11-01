@@ -36,6 +36,7 @@ if (isset($_GET["getAllPaths"]))  echo json_encode(getAllPaths($root));
 
 if (isset($_GET["folderContent"])) {
 
-    $path = $root . $_GET["folderContent"];
+    $path = $root  . $_GET["folderContent"];
+
     echo json_encode(getFolderContent($path, true));
 }

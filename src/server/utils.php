@@ -14,7 +14,6 @@ function absPath()
     return  RealPath(relPath());
 }
 
-
 // array of valid extension
 
 function validExtensions()
@@ -51,10 +50,6 @@ function getAllPaths($path)
     }
     return $rootContent;
 }
-
-
-
-
 function getFolderContent($path, $all = false)
 {
     $contents = scandir($path);  // gives the path of inner files
@@ -62,7 +57,7 @@ function getFolderContent($path, $all = false)
 
     foreach ($contents as $filename) {
         if ($filename[0] != '.') {
-            $file = new File(new SplFileInfo($path . $filename), $all);
+            $file = new File(new SplFileInfo($path . '/' . $filename), $all);
             array_push($arrayFiles, $file);
         }
     }

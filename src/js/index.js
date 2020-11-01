@@ -4,71 +4,52 @@ $(document).ready(function () {
     var pathLabel = $('.path-label');
     var tbody = $(".folder-content tbody");
 
+    //**INITIALIZE **//
+
     initialize();
 
-    getFolderContent(currentPath).then(function (res) {
-
-            console.log(res);
-            res = JSON.parse(res);
-
-            res.forEach(function (file) {
-                var tr = displayFolderContent(file);
-                tbody.append(tr);
-
-            })
-        }
-
-    );
-
-    function displayFolderContent(file) {
-
-        var tr = $('<tr class = "container align-items-center">');
-        var name = $(`<td><span>${file.name}</span></td>`);
-        var size = $(`<td> ${file.size}</td>`);
-        var modified = $(`<td class = " modified" >${file.modified}</td>`);
-
-        tr.append(name, size, modified);
-        return tr;
-
-    }
-
+    // Populates the HTML and displays root folder content
 
     function initialize() {
         getAllPaths().then(function (res) {
-
             console.log(res);
             var folderStructure = JSON.parse(res);
             folderStructure.forEach((file) => {
                 populateFile(file);
 
             })
+
         });
+
+        displayFolderContent(currentPath);
     }
 
-    $("#uploadFile").change(function (e) {
+    // upload file on input uploaded
 
+    $("#uploadFile").change(function (e) {
         console.log('event triggered');
         e.preventDefault();
         var data = new FormData();
         var files = document.getElementById('uploadFile').files;
         data.append('file', files[0]);
-
         console.log(currentPath);
         uploadFile(data, currentPath).then(res => {
             console.log(res);
             res = JSON.parse(res);
-            message(res["message"], res["status"]);
-
+            message(res[1]["message"], res[1]["status"]);
+            if (res[1]["status"] == 200) {
+                populateFile(res[0]);
+                if (res[0].parentPath == currentPath) tbody.append(displayInTable(res[0]));
+            }
         });
     })
 
-    /*** FOLDER TREE **/
+    //*** FOLDER TREE ***//
 
     var rootFolder = $("#rootFolder");
     var rootContainer = $("#rootFolder>.foldercontainer")
     rootFolder.click(function (event) {
         var elem = event.target;
-
         if (elem.tagName.toLowerCase() == "img") elem = event.target.parentNode;
         if (elem.tagName.toLowerCase() == "span" && elem !== event.currentTarget) {
             var type = elem.classList.contains("folder") ? "folder" : "file";
@@ -77,12 +58,27 @@ $(document).ready(function () {
                 var path = $(elem).data('parentpath');
                 if (path) pathLabel.text('root/' + path);
                 else pathLabel.text('root/');
-                currentPath = path;
+
+                if (currentPath != path) {
+                    currentPath = path;
+                    console.log("path:", path);
+                    displayFolderContent(path);
+
+                }
 
             } else if (type == "folder") {
                 if ($(elem).data('path')) pathLabel.text('root/' + $(elem).data('path'));
                 else pathLabel.text('root/');
-                currentPath = $(elem).data('path');
+
+                var path = $(elem).data('path');
+
+                if (currentPath != path) {
+                    currentPath = path;
+
+                    console.log("path:", path);
+                    displayFolderContent(path);
+
+                }
                 var isexpanded = elem.dataset.isexpanded == "true";
                 if (isexpanded) {
                     elem.classList.remove("fa-folder");
@@ -104,6 +100,7 @@ $(document).ready(function () {
         }
     });
 
+    // ***POPULATE HTML*** //
 
     function populateFile(file) {
         if (file.extension == 'folder') {
@@ -134,4 +131,26 @@ $(document).ready(function () {
         }
     }
 
+    function displayFolderContent(path) {
+
+        console.log('folderContent', path);
+        getFolderContent(path).then(function (res) {
+
+            console.log(res);
+            res = JSON.parse(res);
+            res.forEach(function (file) {
+                var tr = displayInTable(file);
+                tbody.append(tr);
+            })
+        });
+    }
+
+    function displayInTable(file) {
+        var tr = $('<tr class = "container align-items-center">');
+        var name = $(`<td><span>${file.name}</span></td>`);
+        var size = $(`<td> ${file.size}</td>`);
+        var modified = $(`<td class = " modified" >${file.modified}</td>`);
+        tr.append(name, size, modified);
+        return tr;
+    }
 })

@@ -52,6 +52,11 @@ function uploadFile(data, location) {
         .then(res => res.text());
 }
 
+
+/**
+ * @description gets the folder content given a right folder path
+ * @param {string} folderPath the folder path
+ */
 function getFolderContent(folderPath) {
     return fetch('src/server/files.php?folderContent=' + folderPath).then(res => res.text())
 }

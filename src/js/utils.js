@@ -1,6 +1,6 @@
 /**
-
  * @description gets the prefix path so the search always starts on root
+ * @returns hardcoded relative path to root
  */
 
 function getPrefixPath() {
@@ -10,7 +10,7 @@ function getPrefixPath() {
 /**
 
  * @param {string} msg message to be displayed
-    @param {string} tag (optional), tag to be added to the message.possible tags: success, error
+ * @param {string} tag (optional), tag to be added to the message.possible tags: success, error
  * @description  displays a user-friendly message during 1.5 seconds
  */
 
