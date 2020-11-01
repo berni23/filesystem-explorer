@@ -30,7 +30,6 @@ if (isset($_FILES['file'])) {
     } else {
 
         $destination =  relPath() . $location_file . '/' . basename($_FILES['file']['name']);
-
         move_uploaded_file(($_FILES['file']['tmp_name']), $destination);
 
         // chmod($destination, 0777);

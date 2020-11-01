@@ -57,7 +57,7 @@ function getAllPaths($path)
 
 function getFolderContent($path, $all = false)
 {
-    $contents = scandir($path);
+    $contents = scandir($path);  // gives the path of inner files
     $arrayFiles = [];
 
     foreach ($contents as $filename) {
@@ -81,7 +81,7 @@ class File
 {
     function __construct($info, bool $all = false)
     {
-        $path =  str_replace("\\", '', substr($info->getPath(), strlen(relPath())));
+        $path =  str_replace("\\", "", substr($info->getPath(), strlen(relPath())));
         $name = $info->getBasename();
         $this->name = trim($name);
         if ((trim($path)))  $this->path = trim($path) . '/' . trim($name);
@@ -91,8 +91,17 @@ class File
         else $this->extension = $info->getExtension();
 
         if ($all) {
-            $this->size = $info->getSize();
-            $this->modified = $info->getMTime();
+
+            $size = ($info->getSize()) / 1000; // Kbytes
+
+
+            if ($size > 1000) {
+                $this->size = round($size / 1000) . ' MB';
+            } else $this->size = round($size) . ' KB';
+
+
+            $date = date('d/m/yy H:i:s', $info->getMTime());
+            $this->modified =  str_replace("\\", "", $date);
             $this->creationDate = $info->getCTime();
         };
     }

@@ -2,11 +2,36 @@ $(document).ready(function () {
 
     var currentPath = ""; // current part starting from root
     var pathLabel = $('.path-label');
-
+    var tbody = $(".folder-content tbody");
 
     initialize();
 
-    getFolderContent(currentPath).then(res => console.log(res));
+    getFolderContent(currentPath).then(function (res) {
+
+            console.log(res);
+            res = JSON.parse(res);
+
+            res.forEach(function (file) {
+                var tr = displayFolderContent(file);
+                tbody.append(tr);
+
+            })
+        }
+
+    );
+
+    function displayFolderContent(file) {
+
+        var tr = $('<tr class = "container align-items-center">');
+        var name = $(`<td><span>${file.name}</span></td>`);
+        var size = $(`<td> ${file.size}</td>`);
+        var modified = $(`<td class = " modified" >${file.modified}</td>`);
+
+        tr.append(name, size, modified);
+        return tr;
+
+    }
+
 
     function initialize() {
         getAllPaths().then(function (res) {
@@ -50,7 +75,6 @@ $(document).ready(function () {
             if (type == "file") {
 
                 var path = $(elem).data('parentpath');
-
                 if (path) pathLabel.text('root/' + path);
                 else pathLabel.text('root/');
                 currentPath = path;
@@ -80,11 +104,9 @@ $(document).ready(function () {
         }
     });
 
-    //getTreePaths().then(res => console.log(res));
 
     function populateFile(file) {
         if (file.extension == 'folder') {
-
             var folder = $('<div class = "foldercontainer"></div>');
             var folderIcon = $(`<span class="folder fa-folder" data-isexpanded="true">${file.name}</span>`);
             folderIcon.attr("data-ext", file.extension);
@@ -93,9 +115,7 @@ $(document).ready(function () {
             folder.append(folderIcon);
 
             if (file.path.split('/').length <= 1) rootContainer.append(folder);
-
             else {
-
                 var parent = $(`.folder[data-path="${file.parentPath}"]`);
                 parent.after(folder);
             }
@@ -106,15 +126,12 @@ $(document).ready(function () {
             newFile.attr("data-path", file.path);
             newFile.attr("data-ext", file.extension);
             newFile.attr("data-parentPath", file.parentPath);
-
             if (file.path.split('/').length <= 1) rootContainer.append(newFile);
-
             else {
                 var parent = $(`.folder[data-path="${file.parentPath}"]`);
                 parent.after(newFile);
             }
         }
-
     }
 
 })
