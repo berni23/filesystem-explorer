@@ -18,7 +18,6 @@ $(document).ready(function () {
         });
     }
 
-
     $("#uploadFile").change(function (e) {
 
         console.log('event triggered');
@@ -115,4 +114,5 @@ $(document).ready(function () {
         }
 
     }
+
 })

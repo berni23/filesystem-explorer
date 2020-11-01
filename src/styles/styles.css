@@ -78,10 +78,11 @@ body {
 }
 
 .navbar {
-    z-index: 2 !important;
+    z-index: 2;
     margin-bottom: 20px;
-    box-shadow: 0 20px 20px -20px rgba(0, 0, 0, 1) !important;
+    box-shadow: 0 20px 20px -20px rgba(0, 0, 0, 1);
 }
+
 
 
 /***UTILS**/
@@ -171,8 +172,6 @@ label>input[type="file"] {
 }
 
 #rootFolder>.foldercontainer {
-
-
     width: 100% !important;
 }
 
@@ -246,17 +245,78 @@ label>input[type="file"] {
 }
 
 
+.navbar-expand-md,
+.navbar-collapse {
+
+    display: flex !important;
+    flex-wrap: nowrap !important;
+
+}
+
+
+.navbar-nav,
+.formInline {
+
+
+    display: flex !important;
+    flex-direction: row !important;
+}
+
+
+.formInline {
+
+    padding: 0 !important;
+    margin: 0 !important;
+    margin-bottom: 0 !important;
+    list-style: none !important;
+    margin-left: auto !important;
+
+}
 
 /** Media queries **/
 
 
-@media (max-width: 768px) {
 
-    .main {
+.mb-sm-0,
+.my-sm-0 {
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+}
+
+.mr-sm-2,
+.mx-sm-2 {
+    margin-right: .5rem !important;
+}
+
+@media (max-width: 768px) {
+    /*  .main {
 
         height: calc(100% - 60px) !important;
 
         min-height: calc(100% - 60px) !important;
     }
+
+    */
+
+    .logo {
+
+        display: none;
+    }
+
+
+}
+
+
+@media (max-width: 580px) {
+    .form-control {
+        width: 200px;
+    }
+}
+
+@media (max-width: 550px) {
+    .form-control {
+        width: 160px;
+    }
+
 
 }
