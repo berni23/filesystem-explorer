@@ -23,7 +23,7 @@ body {
     height: calc(100% - 120px) !important;
 }
 
-/** HTML STRUCTURE -> three columns**/
+/** HTML STRUCTURE -> three columns : files-wrapper, folder-content, file-info**/
 
 .columns-wrapper,
 .files-wrapper {
@@ -31,6 +31,10 @@ body {
     height: 100% !important;
 }
 
+
+.folder-content {
+    height: 100% !important;
+}
 
 .row>div {
     border-right: 1px solid #ccc;
@@ -264,7 +268,6 @@ label>input[type="file"] {
 
 
 .formInline {
-
     padding: 0 !important;
     margin: 0 !important;
     margin-bottom: 0 !important;
@@ -273,9 +276,23 @@ label>input[type="file"] {
 
 }
 
-/** Media queries **/
+/** reset some styles applied by bootstrap **/
 
 
+.table .col-2,
+.table .col-3,
+.table .col-6,
+table.col-1 {
+
+    width: 100% !important;
+    margin-right: 10px !important;
+    text-align: center !important;
+}
+
+.table {
+
+    width: 100% !important;
+}
 
 .mb-sm-0,
 .my-sm-0 {
@@ -288,15 +305,11 @@ label>input[type="file"] {
     margin-right: .5rem !important;
 }
 
+/** Media queries **/
+
+
+
 @media (max-width: 768px) {
-    /*  .main {
-
-        height: calc(100% - 60px) !important;
-
-        min-height: calc(100% - 60px) !important;
-    }
-
-    */
 
     .logo {
 
@@ -304,8 +317,11 @@ label>input[type="file"] {
     }
 
 
-}
+    .table .col-2 {
+        display: none !important;
+    }
 
+}
 
 @media (max-width: 580px) {
     .form-control {
@@ -319,4 +335,55 @@ label>input[type="file"] {
     }
 
 
+}
+
+
+@media (max-width: 610px) {
+
+    .modified-label,
+    .modified {
+        display: none;
+    }
+}
+
+@media (max-width: 420px) {
+
+    .label-label,
+    .label {
+        display: none;
+    }
+
+    footer {
+
+        display: none;
+    }
+
+    .main {
+
+        height: calc(100% - 60px) !important;
+    }
+
+}
+
+/* customized scrollbar*/
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #007bff;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: blue;
 }
