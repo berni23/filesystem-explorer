@@ -171,6 +171,7 @@ label>input[type="file"] {
     font-family: FontAwesome;
     /* padding-left: 10%;*/
     width: 100% !important;
+    height: calc(100% - 138px)!important;
     overflow: auto;
 }
 
@@ -375,6 +376,7 @@ table.col-1 {
 
 ::-webkit-scrollbar {
     width: 10px;
+
 }
 
 /* Track */
@@ -391,5 +393,24 @@ table.col-1 {
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: blue;
+    background: rgb(0, 67, 155);
+}
+
+.w-60{
+    width: 60%!important;
+}
+.w-15{
+    width: 15%!important;
+}
+.w-25{
+    width: 25%!important;
+}
+
+.my-custom-scrollbar {
+    position: relative;
+    height: calc(100% - 125px);
+    overflow: auto;
+    }
+.table-wrapper-scroll-y {
+display: block;
 }

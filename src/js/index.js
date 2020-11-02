@@ -152,6 +152,7 @@ $(document).ready(function () {
             console.log(res);
             res = JSON.parse(res);
             res.forEach(function (file) {
+                console.log(file);
                 var tr = displayInTable(file);
                 tbody.append(tr);
             })
@@ -159,10 +160,11 @@ $(document).ready(function () {
     }
 
     function displayInTable(file) {
-        var tr = $('<tr class = "container align-items-center">');
-        var name = $(`<td><span>${file.name}</span></td>`);
-        var size = $(`<td> ${file.size}</td>`);
-        var modified = $(`<td class = " modified" >${file.modified}</td>`);
+
+        var tr = $('<tr class = "container">');
+        var name = $(`<td><span><img class = "ext-icon" src ="assets/file_extensions/${file.extension}.svg"> ${file.name}</span></td>`);
+        var size = $(`<td class="text-center"> ${file.size}</td>`);
+        var modified = $(`<td class = "modified text-center" >${file.modified}</td>`);
         tr.append(name, size, modified);
         return tr;
     }
