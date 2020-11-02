@@ -265,39 +265,6 @@ label>input[type="file"] {
 }
 
 
-/** BOOSTRAP STYLE RESETING **/
-
-.table .col-2,
-.table .col-3,
-.table .col-6,
-table.col-1 {
-    width: 100% !important;
-    margin-right: 10px !important;
-    text-align: center !important;
-}
-
-.table {
-    width: 100% !important;
-}
-
-.mb-sm-0,
-.my-sm-0 {
-    margin-bottom: 0 !important;
-    margin-top: 0 !important;
-}
-
-.mr-sm-2,
-.mx-sm-2 {
-    margin-right: .5rem !important;
-}
-
-
-.searching {
-    color: black;
-    background-color: #ffc107;
-    border-color: #ffc107;
-}
-
 /** UTILS **/
 
 .flex-column {
@@ -316,7 +283,7 @@ table.col-1 {
 }
 
 .hidden {
-    display: hidden !important;
+    display: none !important;
 }
 
 
@@ -336,13 +303,29 @@ table.col-1 {
 }
 
 .show-info {
-    opacity: 1;
-    visibility: visible;
-    display: inline;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: inline !important;
     transform: scale(1.0);
     transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
     z-index: 1000;
 }
+
+
+.close-button {
+    float: right !important;
+    width: 1.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    background-color: lightgray;
+}
+
+.close-button:hover {
+    background-color: darkgray;
+}
+
 
 /*** SCROLLBAR ***/
 
@@ -387,6 +370,40 @@ table.col-1 {
 
 .table-wrapper-scroll-y {
     display: block;
+}
+
+
+/** BOOSTRAP STYLE RESETING **/
+
+.table .col-2,
+.table .col-3,
+.table .col-6,
+table.col-1 {
+    width: 100% !important;
+    margin-right: 10px !important;
+    text-align: center !important;
+}
+
+.table {
+    width: 100% !important;
+}
+
+.mb-sm-0,
+.my-sm-0 {
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+}
+
+.mr-sm-2,
+.mx-sm-2 {
+    margin-right: .5rem !important;
+}
+
+
+.searching {
+    color: black;
+    background-color: #ffc107;
+    border-color: #ffc107;
 }
 
 /** MEDIA QUERIES **/

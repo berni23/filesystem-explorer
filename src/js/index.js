@@ -10,7 +10,10 @@ $(document).ready(function () {
     var rootIcon = $("#rootIcon");
     var fileInfo = $(".fileInfo");
     var inputSearch = $('#input-search');
-    var newFile_btn = $("#newFile-btn");
+    var newFileModal = $("#newFile-modal");
+    var newFolderModal = $("#newFolder-modal");
+    var newFileBtn = $('#newFileBtn');
+    var modal = $(".modal");
 
     //**INITIALIZE **//
 
@@ -29,18 +32,50 @@ $(document).ready(function () {
         displayFolderContent(currentPath, true);
     }
 
-    //create file
-    newFile_btn.click(function () {
-        makeFile(currentPath, "pepe.pdf").then(function (res) {
-            res = JSON.parse(res);
-            message(res[1]["message"], res[1]["status"]);
-            populateFile(res[0]);
-            tbody.append(displayInTable(res[0]));
-        });
+    newFileModal.click(() => {
+        $('#hiddenModal').click()
+        $('#dropdown-create').click();
+        $('.modal-title').text('file name');
+        newFileBtn.data('file', 'file');
+    });
+
+    newFolderModal.click(() => {
+        $('#hiddenModal').click()
+        $('#dropdown-create').click();
+        $('.modal-title').text('folder name');
+        newFileBtn.data('file', 'folder');
 
     })
 
+    //create file
+
+    newFileBtn.click(function () {
+
+        var name = $('#input-createFile').val(); // input of file or folder name
+        if (newFileBtn.data('file') == 'file') {
+
+            makeFile(currentPath, "pepe.pdf").then(function (res) {
+                res = JSON.parse(res);
+                message(res[1]["message"], res[1]["status"]);
+                populateFile(res[0]);
+                tbody.append(displayInTable(res[0]));
+            });
+        }
+
+        // else is ( newFileBtn.data('file')=='folder)
+    })
+
+    // focus modal
+    /*$('#myModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+    })
+
+    */
+
     // upload file on input uploaded
+
+
+
 
     $("#uploadFile").change(function (e) {
         e.preventDefault();
@@ -76,7 +111,6 @@ $(document).ready(function () {
     })
 
     tbody.click(function (event) {
-        console.log(event.target);
         if (event.target.tagName == "TD" && $(event.target).parent().data('path')) {
             displayFile($(event.target).parent().data().path);
         }
