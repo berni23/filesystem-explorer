@@ -295,6 +295,13 @@ table.col-1 {
 }
 
 
+.searching {
+
+    color: black;
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
 /** UTILS **/
 
 .flex-column {

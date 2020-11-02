@@ -45,7 +45,10 @@ $(document).ready(function () {
     })
 
     $('#search-btn').click(function () {
-        searchFiles($('#input-search').val()).then(res => {
+        var searchVal = $('#input-search').val();
+        pathLabel.addClass('searching');
+        pathLabel.text(`Searching for results containing '${searchVal}'...`);
+        searchFiles().then(res => {
             res = JSON.parse(res);
             tbody.empty();
             res.forEach(function (file) {
@@ -116,7 +119,7 @@ $(document).ready(function () {
     function populateFile(file) {
         if (file.extension == 'folder') {
             var folder = $('<div class = "foldercontainer"></div>');
-            var folderIcon = $(`<span class="folder fa-folder" data-isexpanded="true">${file.name}</span>`);
+            var folderIcon = $(`<span class = "folder fa-folder" data-isexpanded= "true"> ${file.name}</span>`);
             // folderIcon.attr("data-ext", file.extension);
             folderIcon.attr("data-path", file.path);
             folderIcon.attr("data-parentPath", file.parentPath);
