@@ -129,6 +129,7 @@ label>input[type="file"] {
     font-family: FontAwesome;
     /* padding-left: 10%;*/
     width: 100% !important;
+    height: calc(100% - 138px) !important;
     overflow: auto;
 }
 
@@ -334,8 +335,7 @@ table.col-1 {
     z-index: 1000;
 }
 
-
-/* customized scrollbar*/
+/*** SCROLLBAR ***/
 
 ::-webkit-scrollbar {
     width: 10px;
@@ -355,20 +355,41 @@ table.col-1 {
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: blue;
+    background: rgb(0, 67, 155);
+}
+
+.w-60 {
+    width: 60% !important;
+}
+
+.w-15 {
+    width: 15% !important;
+}
+
+.w-25 {
+    width: 25% !important;
+}
+
+.my-custom-scrollbar {
+    position: relative;
+    height: calc(100% - 125px);
+    overflow: auto;
+}
+
+.table-wrapper-scroll-y {
+    display: block;
 }
 
 /** MEDIA QUERIES **/
 
 
 
+/** WIDTH **/
 @media (max-width: 768px) {
 
     .logo {
-
         display: none;
     }
-
 
     .table .col-2 {
         display: none !important;
@@ -409,9 +430,9 @@ table.col-1 {
 
 }
 
+/** WIDTH **/
 
 @media (max-height:620px) {
-
     footer {
         display: none;
     }
@@ -420,10 +441,4 @@ table.col-1 {
 
         height: calc(100% - 80px) !important;
     }
-
-
-
 }
-
-
-/

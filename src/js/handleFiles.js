@@ -3,11 +3,13 @@
  * @param {string} type  'file' for creating file, 'folder' for creating folder, (default is file)
  * @description adds a file if the extension is valid, returns success message 200 if created, else error 400.
  */
-function makeFile(myPath, type = 'file') {
-    var arrayPath = myPath.split('/');
+
+
+function makeFile(myPath, name, myType = 'file') {
     var data = {
-        filename: arrayPath[arrayPath.length - 1],
-        path: myPath
+        filename: name,
+        path: myPath,
+        type: myType
     }
     fetch('src/server/files.php?makeFile', {
             method: 'POST',

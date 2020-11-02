@@ -9,6 +9,7 @@ $root = relPath();
 // check if  the extension is right  -> json file with right extensions ( validation)
 
 if (isset($_GET["makeFile"])) {
+
     $data = json_decode(file_get_contents('php://input'), true);
     if (isset($data['path']) && isset($data['filename'])) {
         $path =  $root . $data['path'];
