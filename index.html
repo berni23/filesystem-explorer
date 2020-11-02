@@ -46,28 +46,6 @@
                     </label>
                 </li>
                 <li class="nav-item dropdown d-flex align-content-center">
-                    <button type="button" class="margin-l-5 btn btn-primary dropdown-toggle" href="#" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-file"></i>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Modify</a>
-                            <a class="dropdown-item" href="#">Delete</a>
-                        </div>
-                    </button>
-                </li>
-                <li class="nav-item dropdown d-flex align-content-center">
-                    <button type="button" class="margin-l-5 btn btn-secondary dropdown-toggle" href="#" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-folder"></i>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Modify</a>
-                            <a class="dropdown-item" href="#">Delete</a>
-                        </div>
-                    </button>
-                </li>
-                <li class="nav-item dropdown d-flex align-content-center">
                     <button type="button" class="margin-l-5 btn btn-success dropdown-toggle" href="#" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-plus"></i>
@@ -102,34 +80,19 @@
             <div class="col-6 flex-column folder-content">
                 <p class="btn btn-primary path-label">Path: root/</p></br>
                 <div class="table-wrapper-scroll-y my-custom-scrollbar">
-                <table class="table container">
-                    <thead class="thead-dark">
-                        <tr class="container text-center">
-                            <th class="w-60">Name</th>
-                            <th class="w-15">Size</th>
-                            <th class="w-25" class="modified-label">Modified</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="container">
-                            <td>Excel 2003</td>
-                            <td>235 KB</td>
-                            <td class="modified">23 Feb, 2016</td>
-                        </tr>
-                        <tr class="container">
-                            <td>Excel 2003</td>
-                            <td>235 KB</td>
-                            <td class="modified">23 Feb, 2016</td>
-                        </tr>
-                        <tr class="container">
-                            <td>Excel 2003</td>
-                            <td>235 KB</td>
-                            <td class="modified">23 Feb, 2016</td>
-                        </tr>
-                    </tbody>
-                </table>
+                    <table class="table container">
+                        <thead class="thead-dark">
+                            <tr class="container text-center">
+                                <th class="w-60">Name</th>
+                                <th class="w-15">Size</th>
+                                <th class="w-25" class="modified-label">Modified</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
             <div class="col-3 d-flex flex-column fileInfo-wrapper">
                 <div class="btn btn-primary label-fileInfo">File info</div>
                 <div class="fileInfo">
@@ -138,8 +101,11 @@
                     <button type="button" class="margin-l-5 btn btn-primary" href="#" role="button"
                         aria-expanded="false">
                         <i class="fa fa-edit"></i>
-
                     </button>
+                    </button>
+                    <button type="button" class="margin-l-5 btn btn-warning" href="#" role="button"
+                        aria-expanded="false">
+                        <i class="fa fa-arrows-alt"></i>
                     </button>
                     <button type="button" class="margin-l-5 btn btn-danger" href="#" role="button"
                         aria-expanded="false">
@@ -149,7 +115,7 @@
             </div>
         </div>
     </div>
-    <footer class="footer page-footer font-small blue blabla2">
+    <footer class="footer page-footer font-small blue">
         <div class="footer text-center py-3 bg-warning"> FileExplorer, © 2020 Copyright, All rights reserved
         </div>
     </footer>

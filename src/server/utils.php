@@ -50,10 +50,10 @@ function getAllPaths($path)
     }
     return $rootContent;
 }
-function getFolderContent($path, $all = false)
+function getFolderContent($path)
 {
     $contents = scandir($path);  // gives the path of inner files
-    $arrayFiles = [];
+    $arrayFiles =  [];
     foreach ($contents as $filename) {
         if ($filename[0] != '.') {
             $file = new File(new SplFileInfo($path . '/' . $filename));
@@ -61,6 +61,11 @@ function getFolderContent($path, $all = false)
         }
     }
     return $arrayFiles;
+}
+
+function getFile($path)
+{
+    return new File(new SplFileInfo($path));
 }
 
 

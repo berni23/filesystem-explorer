@@ -123,6 +123,13 @@ label>input[type="file"] {
     height: 25px;
 }
 
+.ext-icon-big {
+    width: 35px;
+    height: 35px;
+}
+
+
+
 #rootFolder {
     margin: 0;
     margin-top: 50px;
@@ -201,13 +208,11 @@ label>input[type="file"] {
 
 
 .fileInfo-wrapper {
-
     width: 100%;
 
 }
 
 .fileInfo {
-
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -217,12 +222,12 @@ label>input[type="file"] {
 }
 
 .fileInfo p {
-
     margin: 10px 0;
     display: flex;
     flex-wrap: wrap;
     flex-grow: 1;
 }
+
 
 .footer {
     position: absolute;
@@ -230,7 +235,6 @@ label>input[type="file"] {
     width: 100%;
 
 }
-
 
 .formInline {
     padding: 0 !important;
@@ -241,8 +245,29 @@ label>input[type="file"] {
 
 }
 
-/** BOOSTRAP STYLE RESETING **/
+/* Panel on bottom of fileInfo */
 
+.fileOptions {
+    position: absolute;
+    bottom: 40px;
+    width: 100%;
+    padding-top: 20px;
+    border-top: 3px solid black;
+    display: flex;
+    justify-content: center;
+
+}
+
+.fileOptions * {
+    margin: 0 20px;
+}
+
+.fa-arrows-alt {
+    color: white;
+}
+
+
+/** BOOSTRAP STYLE RESETING **/
 
 .table .col-2,
 .table .col-3,
@@ -255,7 +280,6 @@ table.col-1 {
 }
 
 .table {
-
     width: 100% !important;
 }
 
@@ -271,25 +295,7 @@ table.col-1 {
 }
 
 
-
-.fileOptions {
-    position: absolute;
-    bottom: 40px;
-    width: 100%;
-    padding-top: 20px;
-    border-top: 3px solid black;
-    display: flex;
-    justify-content: center;
-
-}
-
-.fileOptions * {
-
-    margin: 0 20px;
-}
-
 /** UTILS **/
-
 
 .flex-column {
     display: flex;

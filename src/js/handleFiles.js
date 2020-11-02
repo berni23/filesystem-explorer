@@ -45,12 +45,12 @@ function uploadFile(data, location) {
 /**
  * @description gets the folder content given a right folder path
  * @param {string} folderPath the folder path
- * @returns {promise}a promise, outputing an array of objects type File when finished.
+ * @returns {promise}a promise, outputing  in the first place a file object with the current folder, 
+ * and in the second place an array of objects type File.
  */
 function getFolderContent(folderPath) {
     return fetch('src/server/files.php?folderContent=' + folderPath).then(res => res.text())
 }
-
 
 /**
  * @description gets all the files or folders which name contains the input search provided
@@ -59,4 +59,9 @@ function getFolderContent(folderPath) {
  */
 function searchFiles(search) {
     return fetch('src/server/files.php?inputSearch=' + search).then(res => res.text());
+}
+
+
+function getFile(path) {
+    return fetch('src/server/files.php?getFile=' + path).then(res => res.text());
 }
