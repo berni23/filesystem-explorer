@@ -19,24 +19,12 @@ function makeFile(myPath, type = 'file') {
         .then(res => res.text()).then(res => console.log(res));
 }
 
-
 /**
  * @description gets all file paths recursively starting on root
  * @returns array with paths, unidimensional array
  */
 function getAllPaths() {
     return fetch('src/server/files.php?getAllPaths').then(res => res.text());
-}
-
-
-/**
- * @description gets all file paths recursively
- * @returns  returns it as a multidimensional asociative array
- */
-
-function getTreePaths(data) {
-    return fetch('src/server/files.php?getTreePath')
-        .then(res => res.text());
 }
 
 /**
@@ -52,11 +40,20 @@ function uploadFile(data, location) {
         .then(res => res.text());
 }
 
-
 /**
  * @description gets the folder content given a right folder path
  * @param {string} folderPath the folder path
  */
 function getFolderContent(folderPath) {
     return fetch('src/server/files.php?folderContent=' + folderPath).then(res => res.text())
+}
+
+
+/**
+ * @description gets all the files or folders which name contains the input search provided
+ * @param {string} search string used to find related file names
+ * @returns {promise} a promise, outputing an array of objects type File
+ */
+function searchFiles(search) {
+    return fetch('src/server/files.php?inputSearch=' + search).then(res => res.text());
 }

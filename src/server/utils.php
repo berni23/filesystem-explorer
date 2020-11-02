@@ -64,6 +64,27 @@ function getFolderContent($path, $all = false)
     return $arrayFiles;
 }
 
+
+function searchFiles($path, $search)
+{
+
+    $content = [];
+    $directory = new RecursiveDirectoryIterator($path, RecursiveDirectoryIterator::SKIP_DOTS);
+    $iterator = new RecursiveIteratorIterator($directory, RecursiveIteratorIterator::SELF_FIRST);
+    foreach ($iterator as $info) {
+        $name = $info->getBasename();
+
+        if (stripos($name, $search) !== false) {
+            $fileObj = new File($info, true);
+            array_push($content, $fileObj);
+        }
+    }
+
+    return $content;
+}
+
+
+
 /*
 
 class file used to pass information of a file from php to javascript.
@@ -88,8 +109,6 @@ class File
         if ($all) {
 
             $size = ($info->getSize()) / 1000; // Kbytes
-
-
             if ($size > 1000) {
                 $this->size = round($size / 1000) . ' MB';
             } else $this->size = round($size) . ' KB';

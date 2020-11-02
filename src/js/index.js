@@ -16,9 +16,7 @@ $(document).ready(function () {
             var folderStructure = JSON.parse(res);
             folderStructure.forEach((file) => {
                 populateFile(file);
-
             })
-
         });
 
         displayFolderContent(currentPath);
@@ -42,6 +40,21 @@ $(document).ready(function () {
                 if (res[0].parentPath == currentPath) tbody.append(displayInTable(res[0]));
             }
         });
+    })
+
+    $('#search-btn').click(function () {
+        searchFiles($('#input-search').val()).then(res => {
+
+            console.log(res);
+            res = JSON.parse(res);
+
+            tbody.empty();
+            res.forEach(function (file) {
+
+                tbody.append(displayInTable(file));
+            })
+
+        })
     })
 
     //*** FOLDER TREE ***//
@@ -133,7 +146,7 @@ $(document).ready(function () {
 
     function displayFolderContent(path) {
 
-        console.log('folderContent', path);
+        tbody.empty();
         getFolderContent(path).then(function (res) {
 
             console.log(res);
