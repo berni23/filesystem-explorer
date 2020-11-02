@@ -8,8 +8,8 @@ $(document).ready(function () {
     var rootFolder = $("#rootFolder");
     var rootContainer = $("#rootFolder>.foldercontainer")
     var rootIcon = $("#rootIcon");
-
     var fileInfo = $(".fileInfo");
+    var newFile_btn = document.getElementById("newFile-btn");
 
     //**INITIALIZE **//
 
@@ -19,7 +19,6 @@ $(document).ready(function () {
 
     function initialize() {
         getAllPaths().then(function (res) {
-            console.log(res);
             var folderStructure = JSON.parse(res);
 
             populateFileInfo(folderStructure[0]);
@@ -31,15 +30,24 @@ $(document).ready(function () {
         displayFolderContent(currentPath);
     }
 
+    //create file
+    newFile_btn.addEventListener("click", function(e){
+        makeFile(currentPath, "pepe.pdf").then(function(res){
+            res = JSON.parse(res);
+            message(res[1]["message"], res[1]["status"]);
+            populateFile(res[0]);
+            displayInTable(res[0]);
+        });
+
+    })
+
     // upload file on input uploaded
 
     $("#uploadFile").change(function (e) {
-        console.log('event triggered');
         e.preventDefault();
         var data = new FormData();
         var files = document.getElementById('uploadFile').files;
         data.append('file', files[0]);
-        console.log(currentPath);
         uploadFile(data, currentPath).then(res => {
             res = JSON.parse(res);
             message(res[1]["message"], res[1]["status"]);
@@ -52,7 +60,6 @@ $(document).ready(function () {
 
     $('#search-btn').click(function () {
         searchFiles($('#input-search').val()).then(res => {
-            console.log(res);
             res = JSON.parse(res);
             tbody.empty();
             res.forEach(function (file) {
@@ -147,7 +154,6 @@ $(document).ready(function () {
         getFolderContent(path).then(function (res) {
             res = JSON.parse(res);
             res.forEach(function (file) {
-                console.log(file);
                 var tr = displayInTable(file);
                 tbody.append(tr);
             })

@@ -5,21 +5,24 @@
  */
 
 
-function makeFile(myPath, name, myType = 'file') {
+function makeFile(myPath, name, myType = "file") {
+
     var data = {
         filename: name,
         path: myPath,
-        type: myType
+        type: myType,
     }
-    fetch('src/server/files.php?makeFile', {
+    return fetch('src/server/files.php?makeFile', {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
                 'Content-Type': 'application/json'
             }
         })
-        .then(res => res.text()).then(res => console.log(res));
+        .then(res => res.text());
 }
+
+
 
 /**
  * @description gets all file paths recursively starting on root
