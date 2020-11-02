@@ -3,6 +3,7 @@ $(document).ready(function () {
     var currentPath = ""; // current part starting from root
     var currentFile = "";
     var pathLabel = $('.path-label');
+    var folderContent = $(".folder-content");
     var tbody = $(".folder-content tbody");
     var rootFolder = $("#rootFolder");
     var rootContainer = $("#rootFolder>.foldercontainer")
@@ -47,19 +48,31 @@ $(document).ready(function () {
     $('#search-btn').click(function () {
         var searchVal = $('#input-search').val();
         pathLabel.addClass('searching');
-        pathLabel.text(`Searching for results containing '${searchVal}'...`);
-        searchFiles().then(res => {
+        pathLabel.text(`Searching for files containing '${searchVal}'...`);
+        searchFiles(searchVal).then(res => {
+
+            console.log(res);
             res = JSON.parse(res);
             tbody.empty();
             res.forEach(function (file) {
                 tbody.append(displayInTable(file));
             })
+            if (res.length) pathLabel.text(`${res.length} results found`);
+            else {
+
+                pathLabel.text('OMG  :(  your search did not produce any results')
+                folderContent.addClass('noResults');
+            };
         })
     })
 
     //*** FOLDER TREE ***//
 
     rootFolder.click(function (event) {
+
+
+        pathLabel.removeClass('searching');
+        folderContent.removeClass('noResults');
         var elem = event.target;
         if (elem.tagName.toLowerCase() == "img") elem = event.target.parentNode;
         if (elem.tagName.toLowerCase() == "span" && elem !== event.currentTarget) {
