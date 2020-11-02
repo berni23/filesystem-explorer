@@ -59,7 +59,13 @@ body {
 
 .folder-content {
     height: 100% !important;
+}
 
+
+.folder-content tr:hover {
+
+    cursor: pointer;
+    background-color: lightblue;
 }
 
 .noResults {
@@ -185,7 +191,6 @@ label>input[type="file"] {
 
 .label-fileInfo {
     margin: 10px !important;
-
 }
 
 /*** DISPLAY FOLDER CONTENT**/
@@ -205,7 +210,6 @@ label>input[type="file"] {
 
 .fileInfo-wrapper {
     width: 100%;
-
 }
 
 .fileInfo {
@@ -229,7 +233,6 @@ label>input[type="file"] {
     position: absolute;
     bottom: 0px;
     width: 100%;
-
 }
 
 .formInline {
@@ -251,7 +254,6 @@ label>input[type="file"] {
     border-top: 3px solid black;
     display: flex;
     justify-content: center;
-
 }
 
 .fileOptions * {
@@ -269,7 +271,6 @@ label>input[type="file"] {
 .table .col-3,
 .table .col-6,
 table.col-1 {
-
     width: 100% !important;
     margin-right: 10px !important;
     text-align: center !important;
@@ -292,7 +293,6 @@ table.col-1 {
 
 
 .searching {
-
     color: black;
     background-color: #ffc107;
     border-color: #ffc107;

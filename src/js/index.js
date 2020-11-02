@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     var currentPath = ""; // current part starting from root
-    var currentFile = "";
+    var currentFile = ""; // path of the current file being displayed
     var pathLabel = $('.path-label');
     var folderContent = $(".folder-content");
     var tbody = $(".folder-content tbody");
@@ -9,7 +9,8 @@ $(document).ready(function () {
     var rootContainer = $("#rootFolder>.foldercontainer")
     var rootIcon = $("#rootIcon");
     var fileInfo = $(".fileInfo");
-    var newFile_btn = document.getElementById("newFile-btn");
+    var inputSearch = $('#input-search');
+    var newFile_btn = $("#newFile-btn");
 
     //**INITIALIZE **//
 
@@ -25,17 +26,16 @@ $(document).ready(function () {
                 populateFile(file);
             })
         });
-
         displayFolderContent(currentPath, true);
     }
 
     //create file
-    newFile_btn.addEventListener("click", function (e) {
+    newFile_btn.click(function () {
         makeFile(currentPath, "pepe.pdf").then(function (res) {
             res = JSON.parse(res);
             message(res[1]["message"], res[1]["status"]);
             populateFile(res[0]);
-            displayInTable(res[0]);
+            tbody.append(displayInTable(res[0]));
         });
 
     })
@@ -58,12 +58,10 @@ $(document).ready(function () {
     })
 
     $('#search-btn').click(function () {
-        var searchVal = $('#input-search').val();
+        var searchVal = inputSearch.val();
         pathLabel.addClass('searching');
         pathLabel.text(`Searching for files containing '${searchVal}'...`);
         searchFiles(searchVal).then(res => {
-
-            console.log(res);
             res = JSON.parse(res);
             tbody.empty();
             res.forEach(function (file) {
@@ -71,18 +69,22 @@ $(document).ready(function () {
             })
             if (res.length) pathLabel.text(`${res.length} results found`);
             else {
-
                 pathLabel.text('OMG  :(  your search did not produce any results')
                 folderContent.addClass('noResults');
             };
         })
     })
 
+    tbody.click(function (event) {
+        console.log(event.target);
+        if (event.target.tagName == "TD" && $(event.target).parent().data('path')) {
+            displayFile($(event.target).parent().data().path);
+        }
+    })
+
     //*** FOLDER TREE ***//
 
     rootFolder.click(function (event) {
-
-
         pathLabel.removeClass('searching');
         folderContent.removeClass('noResults');
         var elem = event.target;
@@ -149,7 +151,6 @@ $(document).ready(function () {
             folderIcon.attr("data-path", file.path);
             folderIcon.attr("data-parentPath", file.parentPath);
             folder.append(folderIcon);
-
             if (file.path.split('/').length <= 1) folder.insertAfter(rootIcon);
             else {
                 var parent = $(`.folder[data-path="${file.parentPath}"]`);
@@ -177,16 +178,15 @@ $(document).ready(function () {
             res.forEach(function (file) {
                 var tr = displayInTable(file);
                 tbody.append(tr);
-
             })
         });
     }
 
     function displayInTable(file) {
-        var tr = $('<tr class = "container">');
+        var tr = $(`<tr class = "container" data-path=${file.path}>`);
         var name = $(`<td><span><img class = "ext-icon" src ="assets/file_extensions/${file.extension}.svg"> ${file.name}</span></td>`);
         var size = $(`<td class="text-center"> ${file.size}</td>`);
-        var modified = $(`<td class = "modified text-center" >${file.modified}</td>`);
+        var modified = $(`<td class = "modified text-center">${file.modified}</td>`);
         tr.append(name, size, modified);
         return tr;
     }
@@ -199,14 +199,11 @@ $(document).ready(function () {
         var create = $(`<p>Creation date:&nbsp;&nbsp;<span>${file.creationDate}</span ></span ></p>`);
         var location = $(`<p>Location:&nbsp;&nbsp; <span>root/${file.parentPath}</span</p>`)
         fileInfo.append(name, size, lastM, create, location);
-
     }
 
     function displayFile(path) {
         getFile(path).then(res => {
             populateFileInfo(JSON.parse(res));
-
         });
-
     }
 })
