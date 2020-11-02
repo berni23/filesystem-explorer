@@ -50,10 +50,10 @@ function getAllPaths($path)
     }
     return $rootContent;
 }
-function getFolderContent($path, $all = false)
+function getFolderContent($path)
 {
     $contents = scandir($path);  // gives the path of inner files
-    $arrayFiles = [];
+    $arrayFiles =  [];
     foreach ($contents as $filename) {
         if ($filename[0] != '.') {
             $file = new File(new SplFileInfo($path . '/' . $filename));
@@ -61,6 +61,11 @@ function getFolderContent($path, $all = false)
         }
     }
     return $arrayFiles;
+}
+
+function getFile($path)
+{
+    return new File(new SplFileInfo($path));
 }
 
 
@@ -101,11 +106,9 @@ class File
         $this->parentPath = $path;
         if ($info->isDir()) $this->extension = 'folder';
         else $this->extension = $info->getExtension();
-
         $size = ($info->getSize()) / 1000; // Kbytes
         if ($size > 1000) $this->size = round($size / 1000) . ' MB';
         else $this->size = round($size) . ' KB';
-
         $date = date('d/m/yy H:i:s', $info->getMTime());
         $this->modified =  str_replace("\\", "", $date);
         $this->creationDate = date('d/m/yy H:i:s', $info->getCTime());

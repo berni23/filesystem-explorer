@@ -28,12 +28,8 @@ if (isset($_FILES['file'])) {
 
         $destination =  relPath() . $location_file . '/' . basename($_FILES['file']['name']);
         move_uploaded_file(($_FILES['file']['tmp_name']), $destination);
-
         chmod($destination, 0777);
-
         $uploadedFile = new File(new SplFileInfo($destination));
-
-
         echo  json_encode(array($uploadedFile, array("status" => 200, "message" => "Success! The file has been uploaded")));
     }
 }
