@@ -29,7 +29,7 @@ function getAllPaths() {
 
 /**
  * @description gets all file paths recursively starting on root
- * @returns  success if successfully uploaded, else error
+ * @returns   a promise, with a mssage success if successfully uploaded, else error
  */
 
 function uploadFile(data, location) {
@@ -43,6 +43,7 @@ function uploadFile(data, location) {
 /**
  * @description gets the folder content given a right folder path
  * @param {string} folderPath the folder path
+ * @returns {promise}a promise, outputing an array of objects type File when finished.
  */
 function getFolderContent(folderPath) {
     return fetch('src/server/files.php?folderContent=' + folderPath).then(res => res.text())
@@ -52,7 +53,7 @@ function getFolderContent(folderPath) {
 /**
  * @description gets all the files or folders which name contains the input search provided
  * @param {string} search string used to find related file names
- * @returns {promise} a promise, outputing an array of objects type File
+ * @returns {promise} a promise, outputing an array of objects type File when finished.
  */
 function searchFiles(search) {
     return fetch('src/server/files.php?inputSearch=' + search).then(res => res.text());

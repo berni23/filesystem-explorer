@@ -24,4 +24,4 @@ if (isset($_GET["makeFile"])) {
 
 if (isset($_GET["getAllPaths"]))   echo json_encode(getAllPaths($root));
 if (isset($_GET["inputSearch"])) echo json_encode(searchFiles($root, $_GET["inputSearch"]));
-if (isset($_GET["folderContent"])) echo json_encode(getFolderContent($root  . $_GET["folderContent"], true));
+if (isset($_GET["folderContent"])) echo json_encode(getFolderContent($root  . $_GET["folderContent"]));

@@ -3,7 +3,7 @@
  * @returns hardcoded relative path to root
  */
 
-function getPrefixPath() {
+function relPath() {
     return '../../root';
 }
 

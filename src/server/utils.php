@@ -54,10 +54,9 @@ function getFolderContent($path, $all = false)
 {
     $contents = scandir($path);  // gives the path of inner files
     $arrayFiles = [];
-
     foreach ($contents as $filename) {
         if ($filename[0] != '.') {
-            $file = new File(new SplFileInfo($path . '/' . $filename), $all);
+            $file = new File(new SplFileInfo($path . '/' . $filename));
             array_push($arrayFiles, $file);
         }
     }
@@ -67,19 +66,16 @@ function getFolderContent($path, $all = false)
 
 function searchFiles($path, $search)
 {
-
     $content = [];
     $directory = new RecursiveDirectoryIterator($path, RecursiveDirectoryIterator::SKIP_DOTS);
     $iterator = new RecursiveIteratorIterator($directory, RecursiveIteratorIterator::SELF_FIRST);
     foreach ($iterator as $info) {
         $name = $info->getBasename();
-
         if (stripos($name, $search) !== false) {
-            $fileObj = new File($info, true);
+            $fileObj = new File($info);
             array_push($content, $fileObj);
         }
     }
-
     return $content;
 }
 
@@ -95,7 +91,7 @@ the initial fields.
 */
 class File
 {
-    function __construct($info, bool $all = false)
+    function __construct($info)
     {
         $path =  str_replace("\\", "", substr($info->getPath(), strlen(relPath())));
         $name = $info->getBasename();
@@ -106,19 +102,15 @@ class File
         if ($info->isDir()) $this->extension = 'folder';
         else $this->extension = $info->getExtension();
 
-        if ($all) {
+        $size = ($info->getSize()) / 1000; // Kbytes
+        if ($size > 1000) $this->size = round($size / 1000) . ' MB';
+        else $this->size = round($size) . ' KB';
 
-            $size = ($info->getSize()) / 1000; // Kbytes
-            if ($size > 1000) {
-                $this->size = round($size / 1000) . ' MB';
-            } else $this->size = round($size) . ' KB';
-
-
-            $date = date('d/m/yy H:i:s', $info->getMTime());
-            $this->modified =  str_replace("\\", "", $date);
-            $this->creationDate = $info->getCTime();
-        };
+        $date = date('d/m/yy H:i:s', $info->getMTime());
+        $this->modified =  str_replace("\\", "", $date);
+        $this->creationDate = date('d/m/yy H:i:s', $info->getCTime());
     }
+
 
     // Properties
 
@@ -126,4 +118,6 @@ class File
     public $path;
     public $parentPath;
     public $extension;
+    public $creationDate;
+    public $modified;
 }

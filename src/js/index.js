@@ -2,10 +2,14 @@ $(document).ready(function () {
 
     var currentPath = ""; // current part starting from root
     var pathLabel = $('.path-label');
+
+    var pathRoot = relPath();
     var tbody = $(".folder-content tbody");
     var rootFolder = $("#rootFolder");
     var rootContainer = $("#rootFolder>.foldercontainer")
     var rootIcon = $("#rootIcon");
+
+    var fileInfo = $(".fileInfo");
 
     //**INITIALIZE **//
 
@@ -17,6 +21,8 @@ $(document).ready(function () {
         getAllPaths().then(function (res) {
             console.log(res);
             var folderStructure = JSON.parse(res);
+
+            populateFileInfo(folderStructure[0]);
             folderStructure.forEach((file) => {
                 populateFile(file);
             })
@@ -35,7 +41,6 @@ $(document).ready(function () {
         data.append('file', files[0]);
         console.log(currentPath);
         uploadFile(data, currentPath).then(res => {
-            console.log(res);
             res = JSON.parse(res);
             message(res[1]["message"], res[1]["status"]);
             if (res[1]["status"] == 200) {
@@ -69,10 +74,8 @@ $(document).ready(function () {
                 var path = $(elem).data('parentpath');
                 if (path) pathLabel.text('root/' + path);
                 else pathLabel.text('root/');
-
                 if (currentPath != path) {
                     currentPath = path;
-                    console.log("path:", path);
                     displayFolderContent(path);
 
                 }
@@ -80,13 +83,10 @@ $(document).ready(function () {
             } else if (type == "folder") {
                 if ($(elem).data('path')) pathLabel.text('root/' + $(elem).data('path'));
                 else pathLabel.text('root/');
-
                 var path = $(elem).data('path');
 
                 if (currentPath != path) {
                     currentPath = path;
-
-                    console.log("path:", path);
                     displayFolderContent(path);
 
                 }
@@ -143,11 +143,8 @@ $(document).ready(function () {
     }
 
     function displayFolderContent(path) {
-
         tbody.empty();
         getFolderContent(path).then(function (res) {
-
-            console.log(res);
             res = JSON.parse(res);
             res.forEach(function (file) {
                 var tr = displayInTable(file);
@@ -163,5 +160,19 @@ $(document).ready(function () {
         var modified = $(`<td class = " modified" >${file.modified}</td>`);
         tr.append(name, size, modified);
         return tr;
+    }
+
+
+    function populateFileInfo(file) {
+
+        var name = `<p><h2>${file.name}&nbsp;&nbsp;<img class = "ext-icon" src ="assets/file_extensions/${file.extension?file.extension:'file'}.svg"</h2></p>`;
+        var size = $(`<p> Size&nbsp;&nbsp;<span>${file.size}</span></p>`);
+        var lastM = $(`<p> Last modified:&nbsp; &nbsp; <span>${file.modified}</span></p>`);
+        var create = $(`<p>Creation date:&nbsp;&nbsp;<span>${file.creationDate}</span ></span ></p>`);
+
+        fileInfo.append(name, size, lastM, create);
+
+
+
     }
 })
