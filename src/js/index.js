@@ -3,6 +3,9 @@ $(document).ready(function () {
     var currentPath = ""; // current part starting from root
     var pathLabel = $('.path-label');
     var tbody = $(".folder-content tbody");
+    var rootFolder = $("#rootFolder");
+    var rootContainer = $("#rootFolder>.foldercontainer")
+    var rootIcon = $("#rootIcon");
 
     //**INITIALIZE **//
 
@@ -44,13 +47,10 @@ $(document).ready(function () {
 
     $('#search-btn').click(function () {
         searchFiles($('#input-search').val()).then(res => {
-
             console.log(res);
             res = JSON.parse(res);
-
             tbody.empty();
             res.forEach(function (file) {
-
                 tbody.append(displayInTable(file));
             })
 
@@ -59,8 +59,6 @@ $(document).ready(function () {
 
     //*** FOLDER TREE ***//
 
-    var rootFolder = $("#rootFolder");
-    var rootContainer = $("#rootFolder>.foldercontainer")
     rootFolder.click(function (event) {
         var elem = event.target;
         if (elem.tagName.toLowerCase() == "img") elem = event.target.parentNode;
@@ -124,10 +122,10 @@ $(document).ready(function () {
             folderIcon.attr("data-parentPath", file.parentPath);
             folder.append(folderIcon);
 
-            if (file.path.split('/').length <= 1) rootContainer.append(folder);
+            if (file.path.split('/').length <= 1) folder.insertAfter(rootIcon);
             else {
                 var parent = $(`.folder[data-path="${file.parentPath}"]`);
-                parent.after(folder);
+                folder.insertAfter(parent);
             }
 
         } else {
@@ -138,8 +136,8 @@ $(document).ready(function () {
             newFile.attr("data-parentPath", file.parentPath);
             if (file.path.split('/').length <= 1) rootContainer.append(newFile);
             else {
-                var parent = $(`.folder[data-path="${file.parentPath}"]`);
-                parent.after(newFile);
+                var parent = $(`.folder[data-path="${file.parentPath}"]`).parent();
+                parent.append(newFile);
             }
         }
     }
