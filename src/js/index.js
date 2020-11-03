@@ -13,6 +13,8 @@ $(document).ready(function () {
     var newFileModal = $("#newFile-modal");
     var newFolderModal = $("#newFolder-modal");
     var newFileBtn = $('#newFileBtn');
+    var d_multimedia = $('#d-multimedia');
+    var file_explorer = $("#file_explorer");
 
     //**INITIALIZE **//
 
@@ -30,6 +32,7 @@ $(document).ready(function () {
         });
         displayFolderContent(currentPath, true);
     }
+
 
     newFileModal.click(() => {
         $('#hiddenModal').click()
@@ -99,8 +102,21 @@ $(document).ready(function () {
     })
 
     tbody.click(function (event) {
+
         var path = $(event.target).closest("[data-path]").data('path');
-        if (path) displayFile(path);
+        var ext = $(event.target).closest("[data-eor]").data('eor');
+        console.log(ext);
+        if(path){
+            displayFile(path);
+            console.log(ext);
+            console.log(path);
+            if(ext == "jpg" || ext == "png" || ext == "svg")
+                displayImage(path);
+            else if(ext == "mp4")
+                displayVideo(path);
+            else if(ext == "mp3")
+                displayAudio(path);
+        }
 
     })
 
@@ -200,12 +216,12 @@ $(document).ready(function () {
             res.forEach(function (file) {
                 var tr = displayInTable(file);
                 tbody.append(tr);
-            })
+            });
         });
     }
 
     function displayInTable(file) {
-        var tr = $(`<tr class = "container" data-path=${file.path}>`);
+        var tr = $(`<tr class="container" data-path="${file.path}" data-eor="${file.extension}"​​​​​​​>`);
         var name = $(`<td><span><img class = "ext-icon" src ="assets/file_extensions/${file.extension}.svg"> ${file.name}</span></td>`);
         var size = $(`<td class="text-center"> ${file.size}</td>`);
         var modified = $(`<td class = "modified text-center">${file.modified}</td>`);
@@ -236,4 +252,48 @@ $(document).ready(function () {
 
     */
 
-})
+function displayImage(path){
+        d_multimedia.empty();
+        var back = $(`<button id="btn-back" type="button" class="margin-l-5 btn btn-info" role="button" aria-expanded="false"><i class="fa fa-arrow-left"> Back</i></button>`);
+        var img = $(`<img src="root/${path}">`);
+        d_multimedia.append(back,img);
+        file_explorer.addClass("hide");
+        d_multimedia.removeClass("hide");
+        $("#btn-back").on('click', function (e) {
+            file_explorer.removeClass("hide");
+            d_multimedia.addClass("hide");
+        })
+
+}
+
+function displayVideo(path){
+    d_multimedia.empty();
+    var back = $(`<button id="btn-back" type="button" class="margin-l-5 btn btn-info" role="button" aria-expanded="false"><i class="fa fa-arrow-left"> Back</i></button>`);
+    var video = $(`<video controls><source src="root/${path}" type="video/mp4">Your browser does not support the video tag.</video>`);
+    d_multimedia.append(back,video);
+    file_explorer.addClass("hide");
+    d_multimedia.removeClass("hide");
+    $("#btn-back").on('click', function (e) {
+        file_explorer.removeClass("hide");
+        d_multimedia.addClass("hide");
+    })
+
+}
+
+function displayAudio(path){
+    d_multimedia.empty();
+    var back = $(`<button id="btn-back" type="button" class="margin-l-5 btn btn-info" role="button" aria-expanded="false"><i class="fa fa-arrow-left"> Back</i></button>`);
+    var music = $(`<audio controls src="root/${path}">Your browser does not support the audio element.</audio>`);
+    d_multimedia.append(back,music);
+    file_explorer.addClass("hide");
+    d_multimedia.removeClass("hide");
+    $("#btn-back").on('click', function (e) {
+        file_explorer.removeClass("hide");
+        d_multimedia.addClass("hide");
+    })
+
+}
+
+
+
+});
