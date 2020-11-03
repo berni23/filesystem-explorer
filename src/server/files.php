@@ -15,7 +15,7 @@ if (isset($_GET["makeFile"])) {
 
     if ($data['type'] == 'file') {
         if (isset($data['path']) && isset($data['filename'])) {
-            $path =  $root . $data['path'] . "/" . $data['filename'];
+            $path =  $root . '/' . $data['path'] . "/" . $data['filename'];
             if (file_exists($path)) echo json_encode(array('status' => 400, 'message' => 'file exists'));
             else {
                 $myfile = fopen($path, "w");
@@ -26,7 +26,7 @@ if (isset($_GET["makeFile"])) {
             }
         }
     } else if ($data['type'] == 'folder') {
-        $path = $root . $data['path'] . '/' . $data['filename'];
+        $path = $root . '/' . $data['path'] . '/' . $data['filename'];
         if (file_exists($path)) echo json_encode(array(null, array('status' => 400, 'message' => 'file exists')));
         else {
             $result = mkdir($path, 0777);
@@ -38,33 +38,35 @@ if (isset($_GET["makeFile"])) {
     }
 }
 
-if (isset($_GET["getAllPaths"])) echo json_encode(getAllPaths($root));
-if (isset($_GET["inputSearch"])) echo json_encode(searchFiles($root, $_GET["inputSearch"]));
-if (isset($_GET["folderContent"])) echo json_encode(getFolderContent($root  . $_GET["folderContent"]));
-if (isset($_GET["getFile"])) echo json_encode(getFile($root . $_GET["getFile"]));
+if (isset($_GET["getAllPaths"])) echo json_encode(getAllPaths($root . '/'));
+if (isset($_GET["inputSearch"])) echo json_encode(searchFiles($root . '/', $_GET["inputSearch"]));
+if (isset($_GET["folderContent"])) echo json_encode(getFolderContent($root . '/'  . $_GET["folderContent"]));
+if (isset($_GET["getFile"])) echo json_encode(getFile($root . '/' . $_GET["getFile"]));
 if (isset($_GET["move"])) {
 
     $data = json_decode(file_get_contents('php://input'), true);
+    $end = $root . '/' . $data['end'];
+    $origin = $root . '/' . $data['origin'];
     $file = is_dir($data['origin']) ? 'folder' : 'file';
-    $end = $root . (realpath($data['end']) ? realpath($data['end']) . '/' : '');
-    $origin = $root  . $data['origin'];
-    if (!is_dir($end))  echo json_encode(array(null, array('status' => 400, 'message' => "error," . $data['end'] . " is not a directory ")));
+    $name = pathinfo($origin)['basename'];
+    if (strlen(realpath($end)) < strlen(realpath($root)) || !is_dir($end)) echo json_encode(array(null, array('status' => 400, 'message' => "error,root/" . $data['end'] . " is not a directory ")));
 
     else {
-        $result = rename($origin, $end . $data['filename']);
-        if ($result) echo json_encode(array(new File(new SplFileInfo($end  . $data['filename'])), array('status' => 200, 'message' => $file . " sucessfully relocated")));
+
+        $result = rename($origin, $end . $name);
+        if ($result) echo json_encode(array(new File(new SplFileInfo($end  . $name)), array('status' => 200, 'message' => $file . " sucessfully relocated")));
         else  echo json_encode(array(null, array('status' => 400, 'message' => "Unknown error, $file could not be relocated")));
     }
 }
 
 
-if (isset($_GET["sendToDelete"])) {
+if (isset($_GET["delete"])) {
+    $path = $root . '/' . $_GET["delete"];
+    $name = pathinfo($path)["basename"];
+    $file = is_dir($path) ? 'folder' : 'file';
+    $oldFile = new File(new SplFileInfo($path));
 
-    $data = json_decode(file_get_contents('php://input'), true);
-    $file = is_dir($data['origin']) ? 'folder' : 'file';
-    $end = $root . '/' . $data['end'];
-    $origin = $root . '/' . $data['origin'];
-    $result = rename($origin, $end . '/' . $data['filename']);
-    if ($result) echo json_encode(array(new File(new SplFileInfo($data['end'] . '/' . $data['filename'])), 'status' => 200, 'message' => "$file sent to trash"));
-    else  echo json_encode(array(new File(new SplFileInfo($data['end'] . '/' . $data['filename'])), 'status' => 400, 'message' => "unknown error, $file  could not be sent to trash"));
+    $result = rename($path, $trash . '/' . $name);
+    if ($result) echo json_encode(array($oldFile, array('status' => 200, 'message' => "$file sent to trash")));
+    else  echo json_encode(array(null, array('status' => 400, 'message' => "unknown error, $file  could not be sent to trash")));
 }

@@ -65,9 +65,8 @@ function getFile(path) {
     return fetch('src/server/files.php?getFile=' + path).then(res => res.text());
 }
 
-function move(name, path1, path2) {
+function move(path1, path2) {
     var data = {
-        filename: name,
         origin: path1,
         end: path2
     }
@@ -75,4 +74,8 @@ function move(name, path1, path2) {
         method: 'POST',
         body: JSON.stringify(data)
     }).then(res => res.text());
+}
+
+function deleteFile(path) {
+    return fetch('src/server/files.php?delete=' + path).then(res => res.text());
 }

@@ -4,14 +4,14 @@
 
 function relPath()
 {
-    return  '../../root/';
+    return  '../../root';
 }
 
 // relative path to the trash folder
 
 function trashPath()
 {
-    return  '../../trash/';
+    return  '../../trash';
 }
 
 // array of valid extension
@@ -97,7 +97,7 @@ class File
 {
     function __construct($info)
     {
-        $path =  str_replace("\\", "", substr($info->getPath(), strlen(relPath())));
+        $path =  str_replace("\\", "", substr($info->getPath(), strlen(relPath() . '/')));
         $name = $info->getBasename();
         $this->name = trim($name);
         if ((trim($path)))  $this->path = trim($path) . '/' . trim($name);

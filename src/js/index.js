@@ -12,50 +12,54 @@ $(document).ready(function () {
     var newFileModal = $("#newFile-modal");
     var newFolderModal = $("#newFolder-modal");
     var newFileBtn = $('#newFileBtn');
-    var btnTrash = $('#btn-trash');
-    var btnEdit = $('#btn-edit');
+    var deleteFileBtn = $('#deleteFileBtn');
 
     //**INITIALIZE **//
 
     initialize();
-
-
     // Populates the HTML and displays root folder content
 
     function initialize() {
+
         getAllPaths().then(function (res) {
-            var folderStructure = JSON.parse(res);
             displayFile(currentPath);
-            folderStructure.forEach((file) => {
-                populateFile(file);
-            })
+            JSON.parse(res).forEach((file) => populateFile(file));
         });
         displayFolderContent(currentPath, true);
     }
-    newFileModal.click(() => {
-        $('#hiddenModal').click()
-        $('#dropdown-create').click();
-        $('.modal-title').text('file name');
-        newFileBtn.data('file', 'file');
-    });
-
-    newFolderModal.click(() => {
-        $('#hiddenModal').click()
-        $('#dropdown-create').click();
-        $('.modal-title').text('folder name');
-        newFileBtn.data('file', 'folder');
-    })
 
     $('#moveFileBtn').click(function () {
         var newPath = $('#input-movepath').val()
-        move(currentFile, newPath, currentFile.split('/')[0]).then(function (res) {
+        move(currentFile, newPath).then(function (res) {
+            res = JSON.parse(res);
+            message(res[1]['message'], res[1]['status']);
+            if ((res[1]['status']) == 200) {
+                populateFile(res[0]);
+                populateFileInfo(res[0]);
+                // remove from actual place
+            }
+        });
+    })
 
+    deleteFileBtn.click(function () {
+        deleteFile(currentFile).then(function (res) {
             console.log(res);
             res = JSON.parse(res);
             message(res[1]['message'], res[1]['status']);
 
+            if (res[1]['status'] == 200) {
+
+
+                currentPath = res[0].parentPath;
+                currentFile = res[0].parentPath;
+                rootContainer.children().not(':first').remove();
+                initialize();
+            }
+
         });
-    })
+    });
+
+
     //create file
 
     newFileBtn.click(function () {
@@ -104,9 +108,7 @@ $(document).ready(function () {
         searchFiles(searchVal).then(res => {
             res = JSON.parse(res);
             tbody.empty();
-            res.forEach(function (file) {
-                tbody.append(displayInTable(file));
-            })
+            res.forEach((file) => tbody.append(displayInTable(file)));
             if (res.length) pathLabel.text(`${res.length} results found`);
             else {
                 pathLabel.text('OMG  :(  your search did not produce any results')
@@ -114,7 +116,6 @@ $(document).ready(function () {
             };
         })
     })
-
 
     tbody.click(function (event) {
         var path = $(event.target).closest("[data-path]").data('path');
@@ -172,6 +173,22 @@ $(document).ready(function () {
         }
     });
 
+    // modals
+
+    newFileModal.click(() => {
+        $('#hiddenModal').click()
+        $('#dropdown-create').click();
+        $('.modal-title').text('file name');
+        newFileBtn.data('file', 'file');
+    });
+
+    newFolderModal.click(() => {
+        $('#hiddenModal').click()
+        $('#dropdown-create').click();
+        $('.modal-title').text('folder name');
+        newFileBtn.data('file', 'folder');
+    })
+
     // ***POPULATE HTML*** //
 
     function populateFile(file) {
@@ -213,7 +230,7 @@ $(document).ready(function () {
     }
 
     function displayInTable(file) {
-        var tr = $(`<tr class = "container"  data-ext=data-path=${file.path}>`);
+        var tr = $(`<tr class = "container" data-path="${file.path}">`);
         var name = $(`<td><div style = "margin-left:50px"><span><img class = "ext-icon" src ="assets/file_extensions/${file.extension?file.extension:'file'}.svg"> ${file.name}</span></div></td>`);
         var size = $(`<td class="text-center"> ${file.size}</td>`);
         var modified = $(`<td class = "modified text-center">${file.modified}</td>`);
@@ -223,7 +240,6 @@ $(document).ready(function () {
 
     function populateFileInfo(file) {
         fileInfo.empty();
-
         currentFile = file.path;
         var name = `<p><h2><img class = "ext-icon-big" src ="assets/file_extensions/${file.extension?file.extension:'file'}.svg">&nbsp;&nbsp;${file.name}</h2></p>`;
         var size = $(`<p> Size&nbsp;&nbsp;<span>${file.size}</span></p>`);
