@@ -46,7 +46,7 @@ if (isset($_GET["move"])) {
 
     $data = json_decode(file_get_contents('php://input'), true);
     $file = is_dir($data['origin']) ? 'folder' : 'file';
-    $end = $root . ($data['end'] ? $data['end'] . '/' : '');
+    $end = $root . (realpath($data['end']) ? realpath($data['end']) . '/' : '');
     $origin = $root  . $data['origin'];
     if (!is_dir($end))  echo json_encode(array(null, array('status' => 400, 'message' => "error," . $data['end'] . " is not a directory ")));
 

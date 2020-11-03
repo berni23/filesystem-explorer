@@ -13,14 +13,12 @@ $(document).ready(function () {
     var newFolderModal = $("#newFolder-modal");
     var newFileBtn = $('#newFileBtn');
     var btnTrash = $('#btn-trash');
-    var btnMove = $('#btn-move');
     var btnEdit = $('#btn-edit');
 
     //**INITIALIZE **//
 
     initialize();
 
-    move('pepe.pdf', 'pepe.pdf', 'folders').then(res => console.log(res));
 
     // Populates the HTML and displays root folder content
 
@@ -41,7 +39,6 @@ $(document).ready(function () {
         newFileBtn.data('file', 'file');
     });
 
-
     newFolderModal.click(() => {
         $('#hiddenModal').click()
         $('#dropdown-create').click();
@@ -49,13 +46,15 @@ $(document).ready(function () {
         newFileBtn.data('file', 'folder');
     })
 
-    btnMove.click(() => $('#hiddenMove').click());
-
-
     $('#moveFileBtn').click(function () {
+        var newPath = $('#input-movepath').val()
+        move(currentFile, newPath, currentFile.split('/')[0]).then(function (res) {
 
+            console.log(res);
+            res = JSON.parse(res);
+            message(res[1]['message'], res[1]['status']);
 
-        console.log('clicked');
+        });
     })
     //create file
 
@@ -115,6 +114,8 @@ $(document).ready(function () {
             };
         })
     })
+
+
     tbody.click(function (event) {
         var path = $(event.target).closest("[data-path]").data('path');
         if (path) displayFile(path);
@@ -138,10 +139,7 @@ $(document).ready(function () {
                     currentPath = path;
                     displayFolderContent(path);
                 }
-                if (currentFile != $(elem).data('path')) {
-                    currentFile = $(elem).data('ppath');
-                    displayFile($(elem).data('path'));
-                }
+                if (currentFile != $(elem).data('path')) displayFile($(elem).data('path'));
 
             } else if (type == "folder") {
                 if ($(elem).data('path')) pathLabel.text('root/' + $(elem).data('path'));
@@ -151,10 +149,8 @@ $(document).ready(function () {
                     currentPath = path;
                     displayFolderContent(path, elem.name, type);
                 }
-                if (currentFile != path) {
-                    currentFile = path;
-                    displayFile(path);
-                }
+                if (currentFile != path) displayFile(path);
+
                 var isexpanded = elem.dataset.isexpanded == "true";
                 if (isexpanded) {
                     elem.classList.remove("fa-folder");
@@ -217,7 +213,7 @@ $(document).ready(function () {
     }
 
     function displayInTable(file) {
-        var tr = $(`<tr class = "container" data-path=${file.path}>`);
+        var tr = $(`<tr class = "container"  data-ext=data-path=${file.path}>`);
         var name = $(`<td><div style = "margin-left:50px"><span><img class = "ext-icon" src ="assets/file_extensions/${file.extension?file.extension:'file'}.svg"> ${file.name}</span></div></td>`);
         var size = $(`<td class="text-center"> ${file.size}</td>`);
         var modified = $(`<td class = "modified text-center">${file.modified}</td>`);
@@ -227,6 +223,8 @@ $(document).ready(function () {
 
     function populateFileInfo(file) {
         fileInfo.empty();
+
+        currentFile = file.path;
         var name = `<p><h2><img class = "ext-icon-big" src ="assets/file_extensions/${file.extension?file.extension:'file'}.svg">&nbsp;&nbsp;${file.name}</h2></p>`;
         var size = $(`<p> Size&nbsp;&nbsp;<span>${file.size}</span></p>`);
         var lastM = $(`<p> Last modified:&nbsp; &nbsp; <span>${file.modified}</span></p>`);
@@ -247,5 +245,6 @@ $(document).ready(function () {
     })
 
     */
+
 
 })
