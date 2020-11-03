@@ -13,7 +13,6 @@ $(document).ready(function () {
     var newFileModal = $("#newFile-modal");
     var newFolderModal = $("#newFolder-modal");
     var newFileBtn = $('#newFileBtn');
-    var modal = $(".modal");
 
     //**INITIALIZE **//
 
@@ -54,7 +53,7 @@ $(document).ready(function () {
         var name = $('#input-createFile').val(); // input of file or folder name
         if (newFileBtn.data('file') == 'file') {
 
-            makeFile(currentPath, "pepe.pdf").then(function (res) {
+            makeFile(currentPath, name, 'file').then(function (res) {
                 res = JSON.parse(res);
                 message(res[1]["message"], res[1]["status"]);
                 populateFile(res[0]);
@@ -73,9 +72,6 @@ $(document).ready(function () {
     */
 
     // upload file on input uploaded
-
-
-
 
     $("#uploadFile").change(function (e) {
         e.preventDefault();
@@ -111,9 +107,9 @@ $(document).ready(function () {
     })
 
     tbody.click(function (event) {
-        if (event.target.tagName == "TD" && $(event.target).parent().data('path')) {
-            displayFile($(event.target).parent().data().path);
-        }
+        var path = $(event.target).closest("[data-path]").data('path');
+        if (path) displayFile(path);
+
     })
 
     //*** FOLDER TREE ***//
