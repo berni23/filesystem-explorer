@@ -1,17 +1,17 @@
-
-
 <?php
-// relative path of the root folder
+
+// relative path to the root folder
 
 function relPath()
 {
     return  '../../root/';
 }
 
-// absolute path of the root folder
-function absPath()
+// relative path to the trash folder
+
+function trashPath()
 {
-    return  RealPath(relPath());
+    return  '../../trash/';
 }
 
 // array of valid extension
@@ -22,6 +22,7 @@ function validExtensions()
 }
 
 // array of errors when uploading
+
 function uploadErors()
 {
     return array(
@@ -68,7 +69,6 @@ function getFile($path)
     return new File(new SplFileInfo($path));
 }
 
-
 function searchFiles($path, $search)
 {
     $content = [];
@@ -83,7 +83,6 @@ function searchFiles($path, $search)
     }
     return $content;
 }
-
 
 
 /*
@@ -113,7 +112,6 @@ class File
         $this->modified =  str_replace("\\", "", $date);
         $this->creationDate = date('d/m/yy H:i:s', $info->getCTime());
     }
-
 
     // Properties
 

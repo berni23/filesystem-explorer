@@ -46,8 +46,30 @@ body {
 /** MAIN-> three columns : files-wrapper, folder-content, file-info**/
 
 
+
 .main {
     height: calc(100% - 140px) !important;
+}
+
+.label-title {
+
+    padding: 5px 0;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+
 }
 
 
@@ -158,6 +180,7 @@ label>input[type="file"] {
 
 .folder {
     color: black;
+
 }
 
 .file {
@@ -197,7 +220,6 @@ label>input[type="file"] {
 
 
 .path-label {
-    height: 40px !important;
     color: white;
     margin-top: 10px;
     margin: 10px 20px 20px 20px;
@@ -397,6 +419,11 @@ table.col-1 {
     margin-right: .5rem !important;
 }
 
+.filename {
+
+    margin-left: 50px !important;
+}
+
 
 .searching {
     color: black;
@@ -415,9 +442,6 @@ table.col-1 {
         display: none;
     }
 
-    .table .col-2 {
-        display: none !important;
-    }
 
 }
 
@@ -443,7 +467,6 @@ table.col-1 {
 }
 
 @media (max-width: 420px) {
-
     footer {
         display: none;
     }
@@ -452,7 +475,9 @@ table.col-1 {
         height: calc(100% - 80px) !important;
     }
 
+
 }
+
 
 /** WIDTH **/
 
@@ -462,7 +487,6 @@ table.col-1 {
     }
 
     .main {
-
         height: calc(100% - 80px) !important;
     }
 }

@@ -12,10 +12,15 @@ $(document).ready(function () {
     var newFileModal = $("#newFile-modal");
     var newFolderModal = $("#newFolder-modal");
     var newFileBtn = $('#newFileBtn');
+    var btnTrash = $('#btn-trash');
+    var btnMove = $('#btn-move');
+    var btnEdit = $('#btn-edit');
 
     //**INITIALIZE **//
 
     initialize();
+
+    move('pepe.pdf', 'pepe.pdf', 'folders').then(res => console.log(res));
 
     // Populates the HTML and displays root folder content
 
@@ -35,27 +40,46 @@ $(document).ready(function () {
         $('.modal-title').text('file name');
         newFileBtn.data('file', 'file');
     });
+
+
     newFolderModal.click(() => {
         $('#hiddenModal').click()
         $('#dropdown-create').click();
         $('.modal-title').text('folder name');
         newFileBtn.data('file', 'folder');
+    })
 
+    btnMove.click(() => $('#hiddenMove').click());
+
+
+    $('#moveFileBtn').click(function () {
+
+
+        console.log('clicked');
     })
     //create file
 
     newFileBtn.click(function () {
         var name = $('#input-createFile').val(); // input of file or folder name
-        console.log('inside makefile');
-        makeFile(currentPath, name, newFileBtn.data('file')).then(function (res) {
-            console.log(res);
-            res = JSON.parse(res);
-            message(res[1]["message"], res[1]["status"]);
-            populateFile(res[0]);
-            tbody.append(displayInTable(res[0]));
-        });
-
+        name = name.replace(/ /g, "_");
+        var validate = validateName(name);
+        if (validate[0]) {
+            makeFile(currentPath, name, newFileBtn.data('file')).then(function (res) {
+                console.log(res);
+                res = JSON.parse(res);
+                message(res[1]["message"], res[1]["status"]);
+                populateFile(res[0]);
+                tbody.append(displayInTable(res[0]));
+            });
+        } else message(validate[1], 400);
     })
+
+    function validateName(name) {
+        var message = 'names cannot include "." or "/"';
+        if (name.includes('/') || name.includes('.')) return [false, message];
+        else return [true, ''];
+
+    }
     // upload file on input uploaded
 
     $("#uploadFile").change(function (e) {
@@ -123,17 +147,14 @@ $(document).ready(function () {
                 if ($(elem).data('path')) pathLabel.text('root/' + $(elem).data('path'));
                 else pathLabel.text('root/');
                 var path = $(elem).data('path');
-
                 if (currentPath != path) {
                     currentPath = path;
                     displayFolderContent(path, elem.name, type);
                 }
-
                 if (currentFile != path) {
                     currentFile = path;
                     displayFile(path);
                 }
-
                 var isexpanded = elem.dataset.isexpanded == "true";
                 if (isexpanded) {
                     elem.classList.remove("fa-folder");
@@ -170,7 +191,6 @@ $(document).ready(function () {
                 var parent = $(`.folder[data-path="${file.parentPath}"]`);
                 folder.insertAfter(parent);
             }
-
         } else {
 
             var newFile = $(`<span class ="file"><img class = "ext-icon" src ="assets/file_extensions/${file.extension?file.extension:'file'}.svg">${file.name}</span>`);
@@ -198,7 +218,7 @@ $(document).ready(function () {
 
     function displayInTable(file) {
         var tr = $(`<tr class = "container" data-path=${file.path}>`);
-        var name = $(`<td><span><img class = "ext-icon" src ="assets/file_extensions/${file.extension?file.extension:'file'}.svg"> ${file.name}</span></td>`);
+        var name = $(`<td><div style = "margin-left:50px"><span><img class = "ext-icon" src ="assets/file_extensions/${file.extension?file.extension:'file'}.svg"> ${file.name}</span></div></td>`);
         var size = $(`<td class="text-center"> ${file.size}</td>`);
         var modified = $(`<td class = "modified text-center">${file.modified}</td>`);
         tr.append(name, size, modified);
