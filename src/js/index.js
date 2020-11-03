@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
     var currentPath = ""; // current part starting from root
     var currentFile = ""; // path of the current file being displayed
     var pathLabel = $('.path-label');
@@ -30,14 +29,12 @@ $(document).ready(function () {
         });
         displayFolderContent(currentPath, true);
     }
-
     newFileModal.click(() => {
         $('#hiddenModal').click()
         $('#dropdown-create').click();
         $('.modal-title').text('file name');
         newFileBtn.data('file', 'file');
     });
-
     newFolderModal.click(() => {
         $('#hiddenModal').click()
         $('#dropdown-create').click();
@@ -45,16 +42,12 @@ $(document).ready(function () {
         newFileBtn.data('file', 'folder');
 
     })
-
     //create file
 
     newFileBtn.click(function () {
-
         var name = $('#input-createFile').val(); // input of file or folder name
         console.log('inside makefile');
-
         makeFile(currentPath, name, newFileBtn.data('file')).then(function (res) {
-
             console.log(res);
             res = JSON.parse(res);
             message(res[1]["message"], res[1]["status"]);
@@ -83,6 +76,7 @@ $(document).ready(function () {
     $('#search-btn').click(function () {
         var searchVal = inputSearch.val();
         pathLabel.addClass('searching');
+        folderContent.removeClass('noResults');
         pathLabel.text(`Searching for files containing '${searchVal}'...`);
         searchFiles(searchVal).then(res => {
             res = JSON.parse(res);
@@ -97,7 +91,6 @@ $(document).ready(function () {
             };
         })
     })
-
     tbody.click(function (event) {
         var path = $(event.target).closest("[data-path]").data('path');
         if (path) displayFile(path);
@@ -121,7 +114,6 @@ $(document).ready(function () {
                     currentPath = path;
                     displayFolderContent(path);
                 }
-
                 if (currentFile != $(elem).data('path')) {
                     currentFile = $(elem).data('ppath');
                     displayFile($(elem).data('path'));
@@ -206,7 +198,7 @@ $(document).ready(function () {
 
     function displayInTable(file) {
         var tr = $(`<tr class = "container" data-path=${file.path}>`);
-        var name = $(`<td><span><img class = "ext-icon" src ="assets/file_extensions/${file.extension}.svg"> ${file.name}</span></td>`);
+        var name = $(`<td><span><img class = "ext-icon" src ="assets/file_extensions/${file.extension?file.extension:'file'}.svg"> ${file.name}</span></td>`);
         var size = $(`<td class="text-center"> ${file.size}</td>`);
         var modified = $(`<td class = "modified text-center">${file.modified}</td>`);
         tr.append(name, size, modified);

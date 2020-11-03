@@ -239,7 +239,6 @@ label>input[type="file"] {
     margin-bottom: 0 !important;
     list-style: none !important;
     margin-left: auto !important;
-
 }
 
 /* Panel on bottom of fileInfo */
@@ -251,17 +250,13 @@ label>input[type="file"] {
     padding-top: 20px;
     border-top: 3px solid black;
     display: flex;
-    position: relative;
+    flex-wrap: wrap !important;
     justify-content: center;
-
 }
 
 .fileOptions * {
-    margin: 0 20px;
-
+    margin: 0 20px 10px 20px;
 }
-
-
 
 .fa-arrows-alt {
     color: white;

@@ -22,8 +22,6 @@ function makeFile(myPath, name, myType = "file") {
         .then(res => res.text());
 }
 
-
-
 /**
  * @description gets all file paths recursively starting on root
  * @returns array with paths, unidimensional array
