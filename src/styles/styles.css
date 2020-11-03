@@ -204,21 +204,19 @@ label>input[type="file"] {
     border-radius: 5px;
 }
 
-
 /*** FILE INFO **/
 
 
 .fileInfo-wrapper {
-    width: 100%;
+    width: 100% !important;
 }
 
 .fileInfo {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
+    flex-wrap: wrap !important;
     margin-left: 20px;
-    width: 100%;
-
+    width: 100% !important;
 }
 
 .fileInfo p {
@@ -253,12 +251,17 @@ label>input[type="file"] {
     padding-top: 20px;
     border-top: 3px solid black;
     display: flex;
+    position: relative;
     justify-content: center;
+
 }
 
 .fileOptions * {
     margin: 0 20px;
+
 }
+
+
 
 .fa-arrows-alt {
     color: white;

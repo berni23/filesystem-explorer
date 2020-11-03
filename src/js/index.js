@@ -51,26 +51,18 @@ $(document).ready(function () {
     newFileBtn.click(function () {
 
         var name = $('#input-createFile').val(); // input of file or folder name
-        if (newFileBtn.data('file') == 'file') {
+        console.log('inside makefile');
 
-            makeFile(currentPath, name, 'file').then(function (res) {
-                res = JSON.parse(res);
-                message(res[1]["message"], res[1]["status"]);
-                populateFile(res[0]);
-                tbody.append(displayInTable(res[0]));
-            });
-        }
+        makeFile(currentPath, name, newFileBtn.data('file')).then(function (res) {
 
-        // else is ( newFileBtn.data('file')=='folder)
+            console.log(res);
+            res = JSON.parse(res);
+            message(res[1]["message"], res[1]["status"]);
+            populateFile(res[0]);
+            tbody.append(displayInTable(res[0]));
+        });
+
     })
-
-    // focus modal
-    /*$('#myModal').on('shown.bs.modal', function () {
-        $('#myInput').trigger('focus')
-    })
-
-    */
-
     // upload file on input uploaded
 
     $("#uploadFile").change(function (e) {
@@ -236,4 +228,12 @@ $(document).ready(function () {
             populateFileInfo(JSON.parse(res));
         });
     }
+
+    // focus modal
+    /*$('#myModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+    })
+
+    */
+
 })
