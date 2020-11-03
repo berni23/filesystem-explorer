@@ -59,14 +59,15 @@ if (isset($_GET["move"])) {
     }
 }
 
-
 if (isset($_GET["delete"])) {
     $path = $root . '/' . $_GET["delete"];
     $name = pathinfo($path)["basename"];
     $file = is_dir($path) ? 'folder' : 'file';
     $oldFile = new File(new SplFileInfo($path));
-
     $result = rename($path, $trash . '/' . $name);
     if ($result) echo json_encode(array($oldFile, array('status' => 200, 'message' => "$file sent to trash")));
     else  echo json_encode(array(null, array('status' => 400, 'message' => "unknown error, $file  could not be sent to trash")));
 }
+
+
+// to do: isset ( edit); ( only valid names, use validation from moving)

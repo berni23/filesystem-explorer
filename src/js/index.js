@@ -12,7 +12,6 @@ $(document).ready(function () {
     var newFileModal = $("#newFile-modal");
     var newFolderModal = $("#newFolder-modal");
     var newFileBtn = $('#newFileBtn');
-    var deleteFileBtn = $('#deleteFileBtn');
 
     //**INITIALIZE **//
 
@@ -20,7 +19,6 @@ $(document).ready(function () {
     // Populates the HTML and displays root folder content
 
     function initialize() {
-
         getAllPaths().then(function (res) {
             displayFile(currentPath);
             JSON.parse(res).forEach((file) => populateFile(file));
@@ -29,34 +27,12 @@ $(document).ready(function () {
     }
 
     $('#moveFileBtn').click(function () {
-        var newPath = $('#input-movepath').val()
-        move(currentFile, newPath).then(function (res) {
-            res = JSON.parse(res);
-            message(res[1]['message'], res[1]['status']);
-            if ((res[1]['status']) == 200) {
-                populateFile(res[0]);
-                populateFileInfo(res[0]);
-                // remove from actual place
-            }
-        });
-    })
+        var newPath = $('#input-movepath').val();
+        move(currentFile, newPath).then(res => fileMoved(res))
+    });
 
-    deleteFileBtn.click(function () {
-        deleteFile(currentFile).then(function (res) {
-            console.log(res);
-            res = JSON.parse(res);
-            message(res[1]['message'], res[1]['status']);
-
-            if (res[1]['status'] == 200) {
-
-
-                currentPath = res[0].parentPath;
-                currentFile = res[0].parentPath;
-                rootContainer.children().not(':first').remove();
-                initialize();
-            }
-
-        });
+    $('#deleteFileBtn').click(function () {
+        deleteFile(currentFile).then(res => fileMoved(res));
     });
 
 
@@ -255,12 +231,18 @@ $(document).ready(function () {
         });
     }
 
-    // focus modal
-    /*$('#myModal').on('shown.bs.modal', function () {
-        $('#myInput').trigger('focus')
-    })
 
-    */
+    function fileMoved(res) {
+        res = JSON.parse(res);
+        message(res[1]['message'], res[1]['status']);
+        if ((res[1]['status']) == 200) {
+            currentPath = res[0].parentPath;
+            currentFile = res[0].parentPath;
+            rootContainer.children().not(':first').remove();
+            initialize()
+        }
+    }
+
 
 
 })
