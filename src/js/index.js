@@ -63,8 +63,8 @@ $(document).ready(function () {
     })
 
     function validateName(name) {
-        var message = 'names cannot include "." or "/"';
-        if (name.includes('/') || name.includes('.')) return [false, message];
+        var message = 'names cannot include "/"';
+        if (name.includes('/')) return [false, message];
         else return [true, ''];
 
     }
