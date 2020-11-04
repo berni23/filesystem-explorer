@@ -128,5 +128,5 @@ function searchFiles($path, $search)
 function startsWith($string, $startString)
 {
     $len = strlen($startString);
-    return (substr($string, 0, $len) === $startString);
+    return (substr($string, 0, $len) == $startString);
 }

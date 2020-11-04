@@ -43,7 +43,6 @@ $(document).ready(function () {
     $('#deleteFileBtn').click(function () {
         deleteFile(currentFile).then(res => {
             fileMoved(JSON.parse(res));
-
         });
     });
 
@@ -77,6 +76,8 @@ $(document).ready(function () {
         var files = document.getElementById('uploadFile').files;
         data.append('file', files[0]);
         uploadFile(data, currentPath).then(res => {
+
+            console.log(res);
             res = JSON.parse(res);
             message(res[1]["message"], res[1]["status"]);
             if (res[1]["status"] == 200) {
@@ -279,8 +280,6 @@ $(document).ready(function () {
 
     function displayFile(path) {
         getFile(path).then(res => {
-
-            console.log(res);
             populateFileInfo(JSON.parse(res));
         });
     }
@@ -314,7 +313,7 @@ $(document).ready(function () {
         d_multimedia.append(back, video);
         file_explorer.addClass("hide");
         d_multimedia.removeClass("hide");
-        $("#btn-back").on('click', function (e) {
+        $("#btn-back").on('click', function () {
             file_explorer.removeClass("hide");
             d_multimedia.empty();
             d_multimedia.addClass("hide");
