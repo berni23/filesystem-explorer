@@ -1,5 +1,43 @@
 <?php
 
+/*
+
+class file used to pass information of a file from php to javascript.
+The constructor expects a class of type SplFileInfo. as optional parameter, there is a boolean,
+the class retrieves all the information if it is true, else just a subset of it necessary for populating
+the initial fields.
+
+*/
+class File
+{
+    function __construct($info)
+    {
+        $absPath = $info->getPath();
+        if (strlen($absPath) < strlen(relPath())) $this->name = '';
+        else  $this->name = trim($info->getBasename());
+        $path =  str_replace("\\", "", substr($info->getPath(), strlen(relPath() . '/')));
+        if ((trim($path)))  $this->path = trim($path) . '/' . $this->name;
+        else $this->path = $this->name;
+        $this->parentPath = $path;
+        if ($info->isDir()) $this->extension = 'folder';
+        else $this->extension = $info->getExtension();
+        $size = ($info->getSize()) / 1000; // Kbytes
+        if ($size > 1000) $this->size = round($size / 1000) . ' MB';
+        else $this->size = round($size) . ' KB';
+        $date = date('d/m/yy H:i:s', $info->getMTime());
+        $this->modified =  str_replace("\\", "", $date);
+        $this->creationDate = date('d/m/yy H:i:s', $info->getCTime());
+    }
+
+    // Properties
+    public $name;
+    public $path;
+    public $parentPath;
+    public $extension;
+    public $creationDate;
+    public $modified;
+}
+
 // relative path to the root folder
 
 function relPath()
@@ -85,40 +123,10 @@ function searchFiles($path, $search)
 }
 
 
-/*
 
-class file used to pass information of a file from php to javascript.
-The constructor expects a class of type SplFileInfo. as optional parameter, there is a boolean,
-the class retrieves all the information if it is true, else just a subset of it necessary for populating
-the initial fields.
 
-*/
-class File
+function startsWith($string, $startString)
 {
-    function __construct($info)
-    {
-        $absPath = $info->getPath();
-        if (strlen($absPath) < strlen(relPath())) $this->name = '';
-        else  $this->name = trim($info->getBasename());
-        $path =  str_replace("\\", "", substr($info->getPath(), strlen(relPath() . '/')));
-        if ((trim($path)))  $this->path = trim($path) . '/' . $this->name;
-        else $this->path = $this->name;
-        $this->parentPath = $path;
-        if ($info->isDir()) $this->extension = 'folder';
-        else $this->extension = $info->getExtension();
-        $size = ($info->getSize()) / 1000; // Kbytes
-        if ($size > 1000) $this->size = round($size / 1000) . ' MB';
-        else $this->size = round($size) . ' KB';
-        $date = date('d/m/yy H:i:s', $info->getMTime());
-        $this->modified =  str_replace("\\", "", $date);
-        $this->creationDate = date('d/m/yy H:i:s', $info->getCTime());
-    }
-
-    // Properties
-    public $name;
-    public $path;
-    public $parentPath;
-    public $extension;
-    public $creationDate;
-    public $modified;
+    $len = strlen($startString);
+    return (substr($string, 0, $len) === $startString);
 }

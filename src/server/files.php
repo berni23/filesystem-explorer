@@ -42,24 +42,19 @@ if (isset($_GET["getAllPaths"])) echo json_encode(getAllPaths($root . '/'));
 if (isset($_GET["inputSearch"])) echo json_encode(searchFiles($root . '/', $_GET["inputSearch"]));
 if (isset($_GET["folderContent"])) echo json_encode(getFolderContent($root . '/'  . $_GET["folderContent"]));
 if (isset($_GET["getFile"])) {
-
-
-
     if (!$_GET["getFile"]) echo json_encode(getFile($root));
-
     else echo json_encode(getFile($root . '/' . $_GET["getFile"]));
 }
 if (isset($_GET["move"])) {
-
     $data = json_decode(file_get_contents('php://input'), true);
     $end = $root . '/' . $data['end'];
     $origin = $root . '/' . $data['origin'];
     $file = is_dir($data['origin']) ? 'folder' : 'file';
     $name = pathinfo($origin)['basename'];
-    if (strlen(realpath($end)) < strlen(realpath($root)) || !is_dir($end)) echo json_encode(array(null, array('status' => 400, 'message' => "error,root/" . $data['end'] . " is not a directory ")));
 
+    if (startsWith($end, $origin)) echo json_encode(array(null, array('status' => 400, 'message' => "error , unable to locate $file inside itself ")));
+    else if (strlen(realpath($end)) < strlen(realpath($root)) || !is_dir($end)) echo json_encode(array(null, array('status' => 400, 'message' => "error,root/" . $data['end'] . " is not a directory ")));
     else {
-
         $result = rename($origin, $end . $name);
         if ($result) echo json_encode(array(new File(new SplFileInfo($end  . $name)), array('status' => 200, 'message' => $file . " sucessfully relocated")));
         else  echo json_encode(array(null, array('status' => 400, 'message' => "Unknown error, $file could not be relocated")));
@@ -76,19 +71,15 @@ if (isset($_GET["delete"])) {
     else  echo json_encode(array(null, array('status' => 400, 'message' => "unknown error, $file  could not be sent to trash")));
 }
 
-
 if (isset($_GET['edit'])) {
-
     $data = json_decode(file_get_contents('php://input'), true);
     $path = $root . '/' . $data['path'];
     $infoPath = pathinfo($path);
     $name = $infoPath['basename'];
     $newPath = $infoPath['dirname'] . '/' . $data['newname'];
     $file = is_dir($path) ? 'folder' : 'file';
-
     if (is_dir($newPath) || file_exists($newPath)) echo json_encode(array(null, array('status' => 400, 'message' => "a file or directory with that name already exists")));
     else {
-
         $result = rename($path, $newPath);
         if ($result) echo json_encode(array(new File(new SplFileInfo($newPath)), array('status' => 200, 'message' => $file . ' successfully renamed')));
         else echo json_encode(array(null, array('status' => 400, 'message' => "unkown error, $file could not be renamed")));

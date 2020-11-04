@@ -29,20 +29,23 @@ $(document).ready(function () {
         displayFolderContent(currentPath, true);
     }
 
+    $('#btn-move').click(() => $('#input-movepath').attr('placeholder', currentPath));
     $('#moveFileBtn').click(function () {
         var newPath = $('#input-movepath').val();
-        move(currentFile, newPath).then(res => fileMoved(JSON.parse(res)));
-    });
 
-    $('#deleteFileBtn').click(function () {
-        deleteFile(currentFile).then(res => {
-
-            console.log(res);
-            fileMoved(JSON.parse(res));
+        move(currentFile, newPath).then(res => {
+            fileMoved(JSON.parse(res))
+            $('#input-movepath').val('');
 
         });
     });
 
+    $('#deleteFileBtn').click(function () {
+        deleteFile(currentFile).then(res => {
+            fileMoved(JSON.parse(res));
+
+        });
+    });
 
     //create file
 
@@ -100,9 +103,12 @@ $(document).ready(function () {
         })
     })
 
-    $('#btn-edit').click(() => $('#input-editFile').attr('placeholder', currentFile.split('/').pop()));
-    $('#editFileBtn').click(function () {
+    $('#btn-edit').click(() => {
+        $('#input-editFile').val('');
+        $('#input-editFile').attr('placeholder', currentFile.split('/').pop())
 
+    });
+    $('#editFileBtn').click(function () {
         console.log('button clicked');
         var newName = $('#input-editFile').val().replace(/ /g, "_");
         if (newName.length == 0) message("new name can't be blank", 400);
