@@ -106,15 +106,15 @@ $(document).ready(function () {
         var path = $(event.target).closest("[data-path]").data('path');
         var ext = $(event.target).closest("[data-eor]").data('eor');
         console.log(ext);
-        if(path){
+        if (path) {
             displayFile(path);
             console.log(ext);
             console.log(path);
-            if(ext == "jpg" || ext == "png" || ext == "svg")
+            if (ext == "jpg" || ext == "png" || ext == "svg")
                 displayImage(path);
-            else if(ext == "mp4")
+            else if (ext == "mp4")
                 displayVideo(path);
-            else if(ext == "mp3")
+            else if (ext == "mp3")
                 displayAudio(path);
         }
 
@@ -252,11 +252,11 @@ $(document).ready(function () {
 
     */
 
-function displayImage(path){
+    function displayImage(path) {
         d_multimedia.empty();
         var back = $(`<button id="btn-back" type="button" class="margin-l-5 btn btn-info" role="button" aria-expanded="false"><i class="fa fa-arrow-left"> Back</i></button>`);
         var img = $(`<img src="root/${path}">`);
-        d_multimedia.append(back,img);
+        d_multimedia.append(back, img);
         file_explorer.addClass("hide");
         d_multimedia.removeClass("hide");
         $("#btn-back").on('click', function (e) {
@@ -264,36 +264,34 @@ function displayImage(path){
             d_multimedia.addClass("hide");
         })
 
-}
+    }
 
-function displayVideo(path){
-    d_multimedia.empty();
-    var back = $(`<button id="btn-back" type="button" class="margin-l-5 btn btn-info" role="button" aria-expanded="false"><i class="fa fa-arrow-left"> Back</i></button>`);
-    var video = $(`<video controls><source src="root/${path}" type="video/mp4">Your browser does not support the video tag.</video>`);
-    d_multimedia.append(back,video);
-    file_explorer.addClass("hide");
-    d_multimedia.removeClass("hide");
-    $("#btn-back").on('click', function (e) {
-        file_explorer.removeClass("hide");
-        d_multimedia.addClass("hide");
-    })
+    function displayVideo(path) {
+        d_multimedia.empty();
+        var back = $(`<button id="btn-back" type="button" class="margin-l-5 btn btn-info" role="button" aria-expanded="false"><i class="fa fa-arrow-left"> Back</i></button>`);
+        var video = $(`<video controls><source src="root/${path}" type="video/mp4">Your browser does not support the video tag.</video>`);
+        d_multimedia.append(back, video);
+        file_explorer.addClass("hide");
+        d_multimedia.removeClass("hide");
+        $("#btn-back").on('click', function (e) {
+            file_explorer.removeClass("hide");
+            d_multimedia.addClass("hide");
+        })
 
-}
+    }
 
-function displayAudio(path){
-    d_multimedia.empty();
-    var back = $(`<button id="btn-back" type="button" class="margin-l-5 btn btn-info" role="button" aria-expanded="false"><i class="fa fa-arrow-left"> Back</i></button>`);
-    var music = $(`<audio controls src="root/${path}">Your browser does not support the audio element.</audio>`);
-    d_multimedia.append(back,music);
-    file_explorer.addClass("hide");
-    d_multimedia.removeClass("hide");
-    $("#btn-back").on('click', function (e) {
-        file_explorer.removeClass("hide");
-        d_multimedia.addClass("hide");
-    })
+    function displayAudio(path) {
+        d_multimedia.empty();
+        var back = $(`<button id="btn-back" type="button" class="margin-l-5 btn btn-info" role="button" aria-expanded="false"><i class="fa fa-arrow-left"> Back</i></button>`);
+        var music = $(`<audio controls src="root/${path}">Your browser does not support the audio element.</audio>`);
+        d_multimedia.append(back, music);
+        file_explorer.addClass("hide");
+        d_multimedia.removeClass("hide");
+        $("#btn-back").on('click', function (e) {
+            file_explorer.removeClass("hide");
+            d_multimedia.addClass("hide");
+        })
 
-}
-
-
+    }
 
 });
