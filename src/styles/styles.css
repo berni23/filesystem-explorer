@@ -3,10 +3,9 @@ html {
     height: 100%;
 }
 
-
 body {
     font-family: 'Montserrat',
-        sans-serif;
+        sans-serif!important;
     margin: 0;
     padding: 0;
     min-height: 100%;
@@ -45,6 +44,13 @@ video {
     margin-right: 20px;
 }
 
+.ste1{
+    font-family: 'Montserrat',sans-serif!important;
+    color:black;
+}
+.ste{
+    font-family: 'Montserrat',sans-serif!important;
+}
 
 
 /**NAVBAR**/
@@ -324,7 +330,9 @@ label>input[type="file"] {
 .fa-arrow-left {
     color: white;
 }
-
+.fa-folder{
+    color:#ffc107;
+}
 
 /** UTILS **/
 

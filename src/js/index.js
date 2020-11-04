@@ -215,7 +215,7 @@ $(document).ready(function () {
     function populateFile(file) {
         if (file.extension == 'folder') {
             var folder = $('<div class = "foldercontainer"></div>');
-            var folderIcon = $(`<span class = "folder fa-folder" data-isexpanded= "true"> ${file.name}</span>`);
+            var folderIcon = $(`<span class = "folder fa-folder" data-isexpanded= "true"><span class="ste1">${file.name}</span></span>`);
             // folderIcon.attr("data-ext", file.extension);
             folderIcon.attr("data-path", file.path);
             folderIcon.attr("data-parentPath", file.parentPath);
@@ -227,7 +227,7 @@ $(document).ready(function () {
             }
         } else {
 
-            var newFile = $(`<span class ="file"><img class = "ext-icon" src ="assets/file_extensions/${file.extension?file.extension:'file'}.svg">${file.name}</span>`);
+            var newFile = $(`<span class ="file"><img class = "ext-icon" src ="assets/file_extensions/${file.extension?file.extension:'file'}.svg"><span class="ste1">${file.name}</span></span>`);
             newFile.attr("data-path", file.path);
             //  newFile.attr("data-ext", file.extension);
             newFile.attr("data-parentPath", file.parentPath);
@@ -295,7 +295,7 @@ $(document).ready(function () {
     }
 
     function displayImage(path) {
-        var back = $(`<button id="btn-back" type="button" class="margin-l-5 btn btn-info" role="button" aria-expanded="false"><i class="fa fa-arrow-left"> Back</i></button>`);
+        var back = $(`<button id="btn-back" type="button" class="margin-l-5 btn btn-info" role="button" aria-expanded="false"><i class="fa fa-arrow-left"> <span class="ste">Back</span></i></button>`);
         var img = $(`<img src="root/${path}">`);
         d_multimedia.append(back, img);
         file_explorer.addClass("hide");
@@ -308,7 +308,7 @@ $(document).ready(function () {
     }
 
     function displayVideo(path) {
-        var back = $(`<button id="btn-back" type="button" class="margin-l-5 btn btn-info" role="button" aria-expanded="false"><i class="fa fa-arrow-left"> Back</i></button>`);
+        var back = $(`<button id="btn-back" type="button" class="margin-l-5 btn btn-info" role="button" aria-expanded="false"><i class="fa fa-arrow-left"> <span class="ste">Back</span></i></button>`);
         var video = $(`<video controls><source src="root/${path}" type="video/mp4">Your browser does not support the video tag.</video>`);
         d_multimedia.append(back, video);
         file_explorer.addClass("hide");
@@ -321,7 +321,7 @@ $(document).ready(function () {
     }
 
     function displayAudio(path) {
-        var back = $(`<button id="btn-back" type="button" class="margin-l-5 btn btn-info" role="button" aria-expanded="false"><i class="fa fa-arrow-left"> Back</i></button>`);
+        var back = $(`<button id="btn-back" type="button" class="margin-l-5 btn btn-info" role="button" aria-expanded="false"><i class="fa fa-arrow-left"> <span class="ste">Back</span></i></button>`);
         var music = $(`<audio controls src="root/${path}">Your browser does not support the audio element.</audio>`);
         d_multimedia.append(back, music);
         file_explorer.addClass("hide");
