@@ -14,6 +14,36 @@ body {
     overflow: hidden;
 }
 
+.hide{
+    display: none!important;
+}
+
+img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+}
+video{
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+}
+#d-multimedia{
+    text-align: center;
+}
+#btn-back{
+    width: 100%;
+    margin-bottom: 30px;
+    font-family: 'Montserrat'!important;
+}
+
+.m-20{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+
+
 /**NAVBAR**/
 
 
@@ -281,6 +311,9 @@ label>input[type="file"] {
 }
 
 .fa-arrows-alt {
+    color: white;
+}
+.fa-arrow-left{
     color: white;
 }
 

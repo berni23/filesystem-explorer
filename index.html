@@ -24,7 +24,6 @@
 
     <!-- scripts -->
 
-    <script src="permissions/permission.js"></script>
     <script src="src/js/utils.js"></script>
     <script src="src/js/handleFiles.js"></script>
     <link rel="stylesheet" href="src/styles/styles.css" />
@@ -83,7 +82,7 @@
             </div>
             <div class="col-6 flex-column folder-content">
                 <div class="label-title path-label">Path: root/</div></br>
-                <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <div id="file_explorer" class="table-wrapper-scroll-y my-custom-scrollbar m-20">
                     <table class="table container">
                         <thead class="thead-dark">
                             <tr class="container text-center">
@@ -95,6 +94,8 @@
                         <tbody>
                         </tbody>
                     </table>
+                </div>
+                <div class="m-20 hide" id="d-multimedia">
                 </div>
             </div>
             <div class="col-3 d-flex flex-column fileInfo-wrapper">
