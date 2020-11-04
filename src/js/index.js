@@ -13,6 +13,7 @@ $(document).ready(function () {
     var newFolderModal = $("#newFolder-modal");
     var newFileBtn = $('#newFileBtn');
 
+
     //**INITIALIZE **//
 
     initialize();
@@ -28,19 +29,18 @@ $(document).ready(function () {
 
     $('#moveFileBtn').click(function () {
         var newPath = $('#input-movepath').val();
-        move(currentFile, newPath).then(res => fileMoved(res))
+        move(currentFile, newPath).then(res => fileMoved(JSON.parse(res)));
     });
 
     $('#deleteFileBtn').click(function () {
-        deleteFile(currentFile).then(res => fileMoved(res));
+        deleteFile(currentFile).then(res => fileMoved(JSON.parse(res)));
     });
 
 
     //create file
 
     newFileBtn.click(function () {
-        var name = $('#input-createFile').val(); // input of file or folder name
-        name = name.replace(/ /g, "_");
+        var name = $('#input-createFile').val().replace(/ /g, "_"); // input of file or folder name
         var validate = validateName(name);
         if (validate[0]) {
             makeFile(currentPath, name, newFileBtn.data('file')).then(function (res) {
@@ -92,6 +92,31 @@ $(document).ready(function () {
             };
         })
     })
+
+
+
+
+    $('#btn-edit').click(() => $('#input-editFile').attr('placeholder', currentFile.split('/').pop()));
+    $('#editFileBtn').click(function () {
+
+        console.log('button clicked');
+        var newName = $('#input-editFile').val().replace(/ /g, "_");
+        if (newName.length == 0) message("new name can't be blank", 400);
+
+
+
+        else {
+            var validate = validateName(newName);
+            if (validate[0]) {
+
+                $('#close-edit').click();
+                editFile(currentFile, newName).then((res) => fileMoved(JSON.parse(res)));
+            } else {
+                message(validate[1], 400);
+                $('#input-editFile').val('');
+            }
+        }
+    });
 
     tbody.click(function (event) {
         var path = $(event.target).closest("[data-path]").data('path');
@@ -233,7 +258,6 @@ $(document).ready(function () {
 
 
     function fileMoved(res) {
-        res = JSON.parse(res);
         message(res[1]['message'], res[1]['status']);
         if ((res[1]['status']) == 200) {
             currentPath = res[0].parentPath;

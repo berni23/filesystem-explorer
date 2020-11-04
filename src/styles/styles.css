@@ -317,7 +317,7 @@ label>input[type="file"] {
     border-radius: 5px;
     box-shadow: 0 0 5px black;
     transform: scale(1.1);
-    z-index: 1000;
+    z-index: 100000;
     opacity: 0;
     transition: visibility 0s linear 0.25s, opacity 0.25s linear 0s, transform 0.25s;
 }

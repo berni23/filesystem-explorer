@@ -79,3 +79,15 @@ function move(path1, path2) {
 function deleteFile(path) {
     return fetch('src/server/files.php?delete=' + path).then(res => res.text());
 }
+
+
+function editFile(path, newName) {
+    var data = {
+        path: path,
+        newname: newName
+    }
+    return fetch('src/server/files.php?edit', {
+        method: 'POST',
+        body: JSON.stringify(data)
+    }).then(res => res.text());
+}

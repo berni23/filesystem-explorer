@@ -70,4 +70,22 @@ if (isset($_GET["delete"])) {
 }
 
 
+if (isset($_GET['edit'])) {
+
+    $data = json_decode(file_get_contents('php://input'), true);
+    $path = $root . '/' . $data['path'];
+    $infoPath = pathinfo($path);
+    $name = $infoPath['basename'];
+    $newPath = $infoPath['dirname'] . '/' . $data['newname'];
+    $file = is_dir($path) ? 'folder' : 'file';
+
+    if (is_dir($newPath) || file_exists($newPath)) echo json_encode(array(null, array('status' => 400, 'message' => "a file or directory with that name already exists")));
+    else {
+
+        $result = rename($path, $newPath);
+        if ($result) echo json_encode(array(new File(new SplFileInfo($newPath)), array('status' => 200, 'message' => $file . ' successfully renamed')));
+        else echo json_encode(array(null, array('status' => 400, 'message' => "unkown error, $file could not be renamed")));
+    }
+}
+
 // to do: isset ( edit); ( only valid names, use validation from moving)
