@@ -141,7 +141,6 @@ $(document).ready(function () {
             else if (ext == "mp3")
                 displayAudio(path);
         }
-
     })
 
     //*** FOLDER TREE ***//

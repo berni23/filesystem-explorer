@@ -5,7 +5,7 @@ html {
 
 body {
     font-family: 'Montserrat',
-        sans-serif!important;
+        sans-serif !important;
     margin: 0;
     padding: 0;
     min-height: 100%;
@@ -44,12 +44,13 @@ video {
     margin-right: 20px;
 }
 
-.ste1{
-    font-family: 'Montserrat',sans-serif!important;
-    color:black;
+.ste1 {
+    font-family: 'Montserrat', sans-serif !important;
+    color: black;
 }
-.ste{
-    font-family: 'Montserrat',sans-serif!important;
+
+.ste {
+    font-family: 'Montserrat', sans-serif !important;
 }
 
 
@@ -278,15 +279,16 @@ label>input[type="file"] {
 }
 
 .fileInfo {
-    display: flex;
+    /*display: flex;*/
     flex-direction: column;
     flex-wrap: wrap !important;
     margin-left: 20px;
     width: 100% !important;
+    height: 75%;
 }
 
 .fileInfo p {
-    margin: 10px 0;
+    margin: 20px 0;
     display: flex;
     flex-wrap: wrap;
     flex-grow: 1;
@@ -309,8 +311,9 @@ label>input[type="file"] {
 /* Panel on bottom of fileInfo */
 
 .fileOptions {
-    position: absolute;
-    bottom: 40px;
+    /* position: absolute;
+    bottom: 40px;*/
+    margin: auto;
     width: 100%;
     padding-top: 20px;
     border-top: 3px solid black;
@@ -330,8 +333,9 @@ label>input[type="file"] {
 .fa-arrow-left {
     color: white;
 }
-.fa-folder{
-    color:#ffc107;
+
+.fa-folder {
+    color: #ffc107;
 }
 
 /** UTILS **/
@@ -480,21 +484,28 @@ table.col-1 {
 
 
 /** WIDTH **/
+
+
+@media (max-width: 1425px) {
+
+    .fileInfo {
+        height: 70% !important;
+    }
+}
+
+
+@media (max-width: 945px) {
+    .fileInfo {
+        height: 65% !important;
+    }
+}
+
 @media (max-width: 768px) {
     .logo {
         display: none;
     }
 
-    /*.navbar-expand-md>#navbarSupportedContent,
-    .navbar-nav {
-        display: -ms-flexbox !important;
-        display: flex !important;
-        -ms-flex-preferred-size: auto !important;
-        flex-basis: auto !important;
-    }
-    */
 }
-
 
 @media (max-width: 580px) {
     .form-control {
@@ -528,7 +539,8 @@ table.col-1 {
 }
 
 
-/** WIDTH **/
+/** HEIGHT **/
+
 
 @media (max-height:620px) {
     footer {
