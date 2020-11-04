@@ -150,7 +150,7 @@ $(document).ready(function () {
         pathLabel.removeClass('searching');
         folderContent.removeClass('noResults');
         var elem = event.target;
-        if (elem.tagName.toLowerCase() == "img") elem = event.target.parentNode;
+        if (elem.tagName.toLowerCase() == "img" || elem.classList.contains('ste1')) elem = event.target.parentNode;
         if (elem.tagName.toLowerCase() == "span" && elem !== event.currentTarget) {
             var type = elem.classList.contains("folder") ? "folder" : "file";
             if (type == "file") {
@@ -280,6 +280,8 @@ $(document).ready(function () {
 
     function displayFile(path) {
         getFile(path).then(res => {
+
+            console.log(res);
             populateFileInfo(JSON.parse(res));
         });
     }
