@@ -12,6 +12,7 @@ $(document).ready(function () {
     var newFileModal = $("#newFile-modal");
     var newFolderModal = $("#newFolder-modal");
     var newFileBtn = $('#newFileBtn');
+    var fileOptions = $('.fileOptions');
 
 
     //**INITIALIZE **//
@@ -33,7 +34,12 @@ $(document).ready(function () {
     });
 
     $('#deleteFileBtn').click(function () {
-        deleteFile(currentFile).then(res => fileMoved(JSON.parse(res)));
+        deleteFile(currentFile).then(res => {
+
+            console.log(res);
+            fileMoved(JSON.parse(res));
+
+        });
     });
 
 
@@ -242,6 +248,10 @@ $(document).ready(function () {
     function populateFileInfo(file) {
         fileInfo.empty();
         currentFile = file.path;
+
+        console.log(file);
+        if (file.path == 'root' && file.parentPath == '') fileOptions.addClass('hidden');
+        else fileOptions.removeClass('hidden');
         var name = `<p><h2><img class = "ext-icon-big" src ="assets/file_extensions/${file.extension?file.extension:'file'}.svg">&nbsp;&nbsp;${file.name}</h2></p>`;
         var size = $(`<p> Size&nbsp;&nbsp;<span>${file.size}</span></p>`);
         var lastM = $(`<p> Last modified:&nbsp; &nbsp; <span>${file.modified}</span></p>`);
