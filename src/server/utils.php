@@ -97,14 +97,10 @@ class File
 {
     function __construct($info)
     {
-
         $absPath = $info->getPath();
         if (strlen($absPath) < strlen(relPath())) $this->name = '';
-
         else  $this->name = trim($info->getBasename());
-
         $path =  str_replace("\\", "", substr($info->getPath(), strlen(relPath() . '/')));
-
         if ((trim($path)))  $this->path = trim($path) . '/' . $this->name;
         else $this->path = $this->name;
         $this->parentPath = $path;

@@ -27,28 +27,25 @@
     <script src="src/js/utils.js"></script>
     <script src="src/js/handleFiles.js"></script>
     <link rel="stylesheet" href="src/styles/styles.css" />
-
     <title>File explorer</title>
 </head>
 
 <body>
-
     <button type="button" id="hiddenModal" class="hidden" data-toggle="modal" data-target="#exampleModalCenter">
     </button>
-
     <div class="info-window hidden">
     </div>
     <nav class="navbar navbar-expand-md  d-flex navbar-dark bg-dark">
         <div class="collapse navbar-collapse d-flex" id="navbarSupportedContent">
             <img class="logo" src="assets/logo.png">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item d-flex align-content-center">
+            <ul class="d-flex  mr-auto buttons-list">
+                <li class="d-flex align-content-center">
                     <label class="btn btn-sm btn-danger" id="formUpload" type="submit">
                         <input type="file" name="userfile" id="uploadFile" />
                         <i class="fa fa-cloud-upload"></i>
                     </label>
                 </li>
-                <li class="nav-item dropdown d-flex align-content-center">
+                <li class="dropdown d-flex align-content-center">
                     <button id="dropdown-create" type="button" class="margin-l-5 btn btn-success dropdown-toggle"
                         href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-plus"></i>

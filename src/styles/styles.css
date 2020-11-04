@@ -14,8 +14,8 @@ body {
     overflow: hidden;
 }
 
-.hide{
-    display: none!important;
+.hide {
+    display: none !important;
 }
 
 img {
@@ -23,21 +23,24 @@ img {
     height: auto;
     max-width: 100%;
 }
-video{
+
+video {
     width: 100%;
     height: auto;
     max-width: 100%;
 }
-#d-multimedia{
+
+#d-multimedia {
     text-align: center;
 }
-#btn-back{
+
+#btn-back {
     width: 100%;
     margin-bottom: 30px;
-    font-family: 'Montserrat'!important;
+    font-family: 'Montserrat' !important;
 }
 
-.m-20{
+.m-20 {
     margin-left: 20px;
     margin-right: 20px;
 }
@@ -47,8 +50,14 @@ video{
 /**NAVBAR**/
 
 
-.navbar-expand-md,
-.navbar-collapse {
+
+
+.buttons-list {
+
+    margin-top: 15px !important;
+}
+
+.navbar-expand-md #navbarSupportedContent {
     display: flex !important;
     flex-wrap: nowrap !important;
 }
@@ -59,6 +68,7 @@ video{
     display: flex !important;
     flex-direction: row !important;
 }
+
 
 .logo {
     margin-right: 20px;
@@ -186,7 +196,6 @@ label>input[type="file"] {
 }
 
 
-
 #rootFolder {
     margin: 0;
     margin-top: 50px;
@@ -210,7 +219,6 @@ label>input[type="file"] {
 
 .folder {
     color: black;
-
 }
 
 .file {
@@ -278,7 +286,6 @@ label>input[type="file"] {
     flex-grow: 1;
 }
 
-
 .footer {
     position: absolute;
     bottom: 0px;
@@ -313,7 +320,8 @@ label>input[type="file"] {
 .fa-arrows-alt {
     color: white;
 }
-.fa-arrow-left{
+
+.fa-arrow-left {
     color: white;
 }
 
@@ -325,11 +333,9 @@ label>input[type="file"] {
     flex-direction: column;
 }
 
-
 .success {
     background-color: #90EE90 !important;
 }
-
 
 .error {
     background-color: #ffcccb !important;
@@ -338,7 +344,6 @@ label>input[type="file"] {
 .hidden {
     display: none !important;
 }
-
 
 .info-window {
     position: fixed;
@@ -363,7 +368,6 @@ label>input[type="file"] {
     transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
     z-index: 1000;
 }
-
 
 .close-button {
     float: right !important;
@@ -428,6 +432,7 @@ label>input[type="file"] {
 
 /** BOOSTRAP STYLE RESETING **/
 
+
 .table .col-2,
 .table .col-3,
 .table .col-6,
@@ -453,7 +458,6 @@ table.col-1 {
 }
 
 .filename {
-
     margin-left: 50px !important;
 }
 
@@ -467,16 +471,22 @@ table.col-1 {
 /** MEDIA QUERIES **/
 
 
-
 /** WIDTH **/
 @media (max-width: 768px) {
-
     .logo {
         display: none;
     }
 
-
+    /*.navbar-expand-md>#navbarSupportedContent,
+    .navbar-nav {
+        display: -ms-flexbox !important;
+        display: flex !important;
+        -ms-flex-preferred-size: auto !important;
+        flex-basis: auto !important;
+    }
+    */
 }
+
 
 @media (max-width: 580px) {
     .form-control {
@@ -507,8 +517,6 @@ table.col-1 {
     .main {
         height: calc(100% - 80px) !important;
     }
-
-
 }
 
 
