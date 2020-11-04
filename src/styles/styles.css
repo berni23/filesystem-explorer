@@ -311,8 +311,6 @@ label>input[type="file"] {
 /* Panel on bottom of fileInfo */
 
 .fileOptions {
-    /* position: absolute;
-    bottom: 40px;*/
     margin: auto;
     width: 100%;
     padding-top: 20px;
