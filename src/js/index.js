@@ -262,19 +262,24 @@ $(document).ready(function () {
     function populateFileInfo(file) {
         fileInfo.empty();
         currentFile = file.path;
-
-        console.log(file);
-        if (file.path == 'root' && file.parentPath == '') fileOptions.addClass('hidden');
-        else fileOptions.removeClass('hidden');
+        var location = file.parentPath;
+        if (file.path) {
+            location = 'root/' + location;
+            fileOptions.removeClass('hidden');
+        } else {
+            fileOptions.addClass('hidden');
+            file.name = 'root';
+        }
         var name = `<p><h2><img class = "ext-icon-big" src ="assets/file_extensions/${file.extension?file.extension:'file'}.svg">&nbsp;&nbsp;${file.name}</h2></p>`;
         var size = $(`<p> Size&nbsp;&nbsp;<span>${file.size}</span></p>`);
         var lastM = $(`<p> Last modified:&nbsp; &nbsp; <span>${file.modified}</span></p>`);
         var create = $(`<p>Creation date:&nbsp;&nbsp;<span>${file.creationDate}</span ></span ></p>`);
-        var location = $(`<p>Location:&nbsp;&nbsp; <span>root/${file.parentPath}</span</p>`)
+        var location = $(`<p>Location:&nbsp;&nbsp; <span>${location}</span</p>`)
         fileInfo.append(name, size, lastM, create, location);
     }
 
     function displayFile(path) {
+
         getFile(path).then(res => {
             populateFileInfo(JSON.parse(res));
         });

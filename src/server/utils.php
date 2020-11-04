@@ -97,11 +97,16 @@ class File
 {
     function __construct($info)
     {
+
+        $absPath = $info->getPath();
+        if (strlen($absPath) < strlen(relPath())) $this->name = '';
+
+        else  $this->name = trim($info->getBasename());
+
         $path =  str_replace("\\", "", substr($info->getPath(), strlen(relPath() . '/')));
-        $name = $info->getBasename();
-        $this->name = trim($name);
-        if ((trim($path)))  $this->path = trim($path) . '/' . trim($name);
-        else $this->path = trim($name);
+
+        if ((trim($path)))  $this->path = trim($path) . '/' . $this->name;
+        else $this->path = $this->name;
         $this->parentPath = $path;
         if ($info->isDir()) $this->extension = 'folder';
         else $this->extension = $info->getExtension();
@@ -114,7 +119,6 @@ class File
     }
 
     // Properties
-
     public $name;
     public $path;
     public $parentPath;
