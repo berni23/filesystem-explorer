@@ -13,18 +13,27 @@ class File
     function __construct($info)
     {
         $absPath = $info->getPath();
+
         if (strlen($absPath) < strlen(relPath())) $this->name = '';
         else  $this->name = trim($info->getBasename());
+
         $path =  str_replace("\\", "", substr($info->getPath(), strlen(relPath() . '/')));
+
         if ((trim($path)))  $this->path = trim($path) . '/' . $this->name;
+
         else $this->path = $this->name;
         $this->parentPath = $path;
+
         if ($info->isDir()) $this->extension = 'folder';
         else $this->extension = $info->getExtension();
+
         $size = ($info->getSize()) / 1000; // Kbytes
-        if ($size > 1000) $this->size = round($size / 1000) . ' MB';
+
+        if ($size > 1000) $this->size = round($size / 1000) . ' MB';  //Mbytes
         else $this->size = round($size) . ' KB';
+
         $date = date('d/m/yy H:i:s', $info->getMTime());
+
         $this->modified =  str_replace("\\", "", $date);
         $this->creationDate = date('d/m/yy H:i:s', $info->getCTime());
     }
@@ -121,8 +130,6 @@ function searchFiles($path, $search)
     }
     return $content;
 }
-
-
 
 
 function startsWith($string, $startString)

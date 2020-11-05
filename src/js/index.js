@@ -34,6 +34,7 @@ $(document).ready(function () {
         var newPath = $('#input-movepath').val();
 
         move(currentFile, newPath).then(res => {
+            console.log(res);
             fileMoved(JSON.parse(res))
             $('#input-movepath').val('');
 

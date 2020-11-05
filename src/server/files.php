@@ -9,6 +9,8 @@ $trash = trashPath();
 // check if file exists
 // check if  the extension is right  -> json file with right extensions ( validation)
 
+error_reporting(E_ERROR | E_PARSE);
+
 if (isset($_GET["makeFile"])) {
 
     $data = json_decode(file_get_contents('php://input'), true);
@@ -55,8 +57,8 @@ if (isset($_GET["move"])) {
     if (startsWith($end, $origin)) echo json_encode(array(null, array('status' => 400, 'message' => "error , unable to locate $file inside itself ")));
     else if (strlen(realpath($end)) < strlen(realpath($root)) || !is_dir($end)) echo json_encode(array(null, array('status' => 400, 'message' => "error,root/" . $data['end'] . " is not a directory ")));
     else {
-        $result = rename($origin, $end . $name);
-        if ($result) echo json_encode(array(new File(new SplFileInfo($end  . $name)), array('status' => 200, 'message' => $file . " sucessfully relocated")));
+        $result = rename($origin, $end . '/' . $name);
+        if ($result) echo json_encode(array(new File(new SplFileInfo($end  . '/' . $name)), array('status' => 200, 'message' => $file . " sucessfully relocated")));
         else  echo json_encode(array(null, array('status' => 400, 'message' => "Unknown error, $file could not be relocated")));
     }
 }

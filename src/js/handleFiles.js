@@ -60,11 +60,22 @@ function getFolderContent(folderPath) {
 function searchFiles(search) {
     return fetch('src/server/files.php?inputSearch=' + search).then(res => res.text());
 }
-
+/**
+ * @description gets a files or folders specified
+ * @param {string} path path of the desired file
+ * @returns {promise} a promise, outputing an array created with the File class (php)
+ */
 function getFile(path) {
     return fetch('src/server/files.php?getFile=' + path).then(res => res.text());
 }
 
+
+/**
+ * @description moves a file from path1 to path2
+ * @param {string} path1 origin path of the file to be moved
+ * @param {string} path2 end path of the file to be moved
+ * @returns {promise} an array  with  the object moved and a status message
+ */
 function move(path1, path2) {
     var data = {
         origin: path1,
