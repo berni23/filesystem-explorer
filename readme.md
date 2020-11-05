@@ -13,6 +13,11 @@ In this project , the user has an interface for managing and interacting with hi
 
 
 
+<br>
+
+<img src="assets/final_wireframe.png">
+
+
 <br><br>
 
  <h3> Useful info used in the development of this project</h3>
