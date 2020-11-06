@@ -1,6 +1,6 @@
 <h1 style = "text-align:center"> Local filesystem explorer :cyclone:  :cyclone:</h1>
 
- *A local filesystem explorer for managin your own files, creating new ones or even displaying media.*
+ *A local filesystem explorer for managing your own files, creating new ones or even displaying media.*
  
  
  <p><i><b>Authors: </b>Isma, Bernat</i></p>
@@ -9,8 +9,7 @@
  
  <h3>Description</h3>
 
-In this project , the user has an interface for managing and interacting with his or her own files as well as navigating through them. Its simplistic and user friendly design makes it possible for the user to get a comfrotable experience and intuitively make usage of the different options the interface provides withouth necessariliy having read its documentation.
-
+In this project, the user has an interface for managing and interacting with his or her own files as well as navigating through them. Its simplistic and user friendly design makes it possible for the user to get a comfortable experience and intuitively make usage of the different options the interface provides withouth necessariliy having read its documentation.
 
 
 <br>
